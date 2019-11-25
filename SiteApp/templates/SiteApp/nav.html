@@ -1,0 +1,34 @@
+{% load static %}
+<div
+  class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 mt-4 mx-3"
+>
+  <h5 class="my-0 mr-md-auto ">
+    <a href="{% url 'index' %}"
+      ><img src="{% static 'SiteApp/img/logo.png'%}" alt="" width="350px"
+    /></a>
+  </h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <div class="d-inline">
+    <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'index'%}">Home</a>
+      <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'view_about'%}">About</a>
+      <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'view_services'%}"
+        >Services</a
+      >
+      <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'view_contact'%}">Contact Us</a>
+      {% comment %} <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'fuel_surcharge' %}"
+        >Fuel Surcharge</a
+      > {% endcomment %}
+
+      <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'request_quote' %}"
+        >Request Quote</a
+      >
+      <a class="pb-2 text-uppercase mx-2 letter-spacing-05" href="{% url 'drive_with_us' %}"
+        >Drive With Us</a
+      >
+    </div>
+
+    <a class="p-2 text-uppercase px-1 mx-3 log-in letter-spacing-05" href="{% url 'login' %}"
+      ><span><i class="fas fa-user-tie"></i></span> Log In
+    </a>
+  </nav>
+</div>

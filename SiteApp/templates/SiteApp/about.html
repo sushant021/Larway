@@ -1,0 +1,155 @@
+{% extends 'frontend_base.html' %} {% load static %}{% block header %}
+
+<div class="background" id="aboutBackground">
+  <div class="layer">
+    {% include 'SiteApp/nav.html' %}
+    <div class="p-5 empty-space"></div>
+    <div class="text-center">
+      <p class="text-white page-title">About Us</p>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block content %}
+
+<div class="container-fluid">
+  <div class="row my-5 p-5">
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <article class="service-description">
+        <p class="service-heading">Who We Are</p>
+
+        <p class="mt-4">
+          Larway Transportation began operations in 1985 in a shared office
+          suite in Oakridges, Ontario with little more than a hard-line
+          telephone, a Rolodex, and their word to focus on people and their
+          promise and not just cargo. Within the first year of operation, Larway
+          crossed their million-dollar promise and continued to grow. Since
+          then, the company has adapted to meet the needs of their customers and
+          their drivers, leading the way in safety and reliability. In a
+          constantly changing and developing industry, one of Larway’s most
+          important qualities continues to be their word – and that will never
+          change.
+        </p>
+      </article>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      {% load static%}
+      <img
+        src="{% static 'SiteApp/img/larway_team.jpg'%}"
+        alt="Truckload Services"
+        class="img-fluid"
+        style="border-left:10px solid rgba(204, 4, 119, 1)"
+      />
+    </div>
+  </div>
+
+  <div class="row p-5 " style="background-color: rgba(23,22,23,1);">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <p class="text-white p-3" style="font-size: 3em;">
+        Larway was built on commitment – to Clients, Family and to our WORD.
+      </p>
+      <a href="https://youtu.be/Tr0ITUqb5nI"
+        ><img src="{% static 'SiteApp/img/play_gif.gif'%}" alt="" width="150px"
+      /></a>
+      <p class="lead text-white pl-3">Catherine Labatt</p>
+      <p class="small text-white pl-3">Co Founder at Larway</p>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <video width="400" autoplay muted>
+        <source
+          src="{% static 'SiteApp/img/about-video.mp4'%}"
+          type="video/mp4"
+        />
+
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+  </div>
+  <div class="gap-4"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        <article class="service-description">
+          <div class="underline-left">
+            <p class="font-size-15 bolder text-uppercase">Larry Labatt</p>
+            <p class="small text-uppercase">Founding Member</p>
+          </div>
+
+          <p class="mt-4">
+            After driving trucks for 18 years and working as a dispatcher, Larry
+            knew the logistics and transportation business inside and out. He
+            was tired of the daily grind and wanted a change and a better life
+            for himself and his family. Using his knowledge of the industry and
+            his drive, Larry began to lay the foundation for his own company.
+          </p>
+        </article>
+      </div>
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        {% load static%}
+        <img
+          src="{% static 'SiteApp/img/larry.png'%}"
+          alt="Larry Labatt"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        {% load static%}
+        <img
+          src="{% static 'SiteApp/img/cathy.png'%}"
+          width="80%"
+          alt="Refrigerated and dry truckload services"
+          class="img-fluid"
+        />
+      </div>
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        <article class="article-description mt-5 pt-5">
+          <div class="underline-left">
+            <p class="font-size-15 bolder text-uppercase">Catherine Labatt</p>
+            <p class="small text-uppercase">Founding Member</p>
+          </div>
+          <p class="mt-4">
+            Catherine, Larry’s wife, went to school for business and had
+            experience running a fitness studio franchise. She took the idea of
+            a new company and made it a reality. Scrawling a detailed business
+            plan on a large piece of paper, they took it to the bank to ask for
+            a start-up loan of $5,000. She also made a promise to make 1 million
+            dollars in the first year. Their confidence and organization got
+            them the loan, and the foundation was set.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        <article class="service-description mt-5 pt-5">
+          <div class="underline-left">
+            <p class="font-size-15 bolder text-uppercase">Stuart Pound</p>
+            <p class="small text-uppercase">Founding Member</p>
+          </div>
+          <p class="mt-4">
+            Stuart Pound was the piece that completed the Larway puzzle.
+            Starting with a hardline phone and a Rolodex filled with meaningful
+            contacts Stuart, fulfilling the role of sales manager for the new
+            company, began making the necessary connections. A year after the
+            founding members entered the bank to ask for their loan, they had
+            fulfilled their promise of making a million dollars!
+          </p>
+        </article>
+      </div>
+      <div class="col-sm-12 col-lg-6 col-xl-6">
+        {% load static%}
+        <img
+          src="{% static 'SiteApp/img/stuart.png'%}"
+          alt="Stuart Pound"
+          class="img-fluid"
+          style="width: 80%"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+	<h5 class="lead mb-3">Viewing Quote #{{ quote.id }}</h5>
+	<hr>
+	<p> Name:{{quote.name}} </p>
+	<p> Email: {{quote.email}}</p>
+	<p> Contact Number: {{quote.contact}}</p>
+	<p> Destination: {{quote.destination}}</p>
+	<p> Origin: {{quote.origin}}</p>
+	<p> Organization: {{quote.organization}}</p>
+	<p> Message: {{quote.message}}</p>
+</div>
+	
+{% endblock %}

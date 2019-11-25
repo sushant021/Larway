@@ -1,0 +1,25 @@
+{% extends 'frontend_base.html' %} {% load crispy_forms_tags %} 
+{% block title %}
+ Drive With Larway 
+{% endblock %}
+{% block content %}
+<div class="background" id="careerBackground">
+  <div class="layer">
+    {% include 'SiteApp/nav.html' %}
+    <div class="p-5 empty-space"></div>
+    <div class="text-center">
+      <p class="text-white page-title">Drive With Us</p>
+    </div>
+  </div>
+</div>
+<div class="gap-5"></div>
+<div class="container py-4" style="box-shadow:rgba(0,0,0,1) 2px 2px 10px;">
+<h3 class="underline-left">Submit Your Resume</h3>
+  <form action="{% url 'drive_with_us' %}" method="post" class="mt-4">
+    {{ form | crispy }} {% csrf_token %}
+    <input type="submit" value="Submit Resume" class="larway-btn" />
+  </form>
+</div>
+<div class="gap-5"></div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "backend_base.html" %} {% load crispy_forms_tags %}
+{% block content%}
+<div class="container py-3">
+  <h3>Add An Employee</h3>
+  <hr />
+  <form action="{% url 'add_employee' %}" method="post">
+    {{ form | crispy }} {% csrf_token %}
+    <input type="submit" name="Submit Application" class="btn btn-primary" />
+  </form>
+</div>
+
+{% endblock %}

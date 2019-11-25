@@ -1,0 +1,35 @@
+{% extends "backend_base.html" %}
+
+{% block content  %}
+
+<div class="container py-4">
+	<h5>All Quote Requests </h5>
+	<hr> 
+
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Organization</th>
+			<th>Origin</th>
+			<th>Destination</th>
+		</tr>
+		{% for quote_request in quote_requests %}
+		<tr>
+			<td><span>{{quote_request.id}}</span></td>
+			<td><a href="{{quote_request.get_absolute_url }}">{{quote_request.name}}</a></td>
+			<td><span>{{quote_request.email}}</span></td>
+			<td><span>{{quote_request.contact}}</span></td>
+			<td><span>{{quote_request.organization}}</span></td>
+			<td><span>{{quote_request.origin}}</span></td>
+			<td><span>{{quote_request.destination}}</span></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	
+	
+</div>
+{% endblock %}

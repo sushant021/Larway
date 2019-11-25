@@ -1,0 +1,32 @@
+{% extends "backend_base.html" %}
+
+{% block content  %}
+
+<div class="container py-4">
+	<h5>All Quote Requests </h5>
+	<hr> 
+
+	<table class="table">
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Address</th>
+			
+		</tr>
+		{% for resume in resumes %}
+		<tr>
+			<td><span>{{resume.id}}</span></td>
+			<td><a href="{{resume.get_absolute_url }}"><span class="ml-2">{{resume.first_name}}</span> <span >{{resume.middle_name}}</span> <span>{{resume.last_name}}</span></a></td>
+			<td><span>{{resume.email}}</span></td>
+			<td><span>{{resume.contact}}</span></td>
+			<td><span>{{resume.address}}</span></td>
+			
+			
+		</tr>
+		{% endfor %}
+	</table>
+	
+</div>
+{% endblock %}

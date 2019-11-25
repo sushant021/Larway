@@ -1,0 +1,48 @@
+{% extends 'backend_base.html' %} {% block content %}
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>The Larway Team</h3>
+    </div>
+    <div class="col-sm-6">
+      <a href="{% url 'add_employee' %}" class="btn btn-primary float-right"
+        >Add Employee</a
+      >
+    </div>
+  </div>
+  <div class="article mt-4">
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for employee in employees %}
+      <tr>
+        <td><span>{{employee.employee_id}}</span></td>
+        <td>
+          <a href="{{employee.get_absolute_url }}"
+            >{{employee.first_name}} {{employee.last_name}}</a
+          >
+        </td>
+        <td><span>{{employee.email}}</span></td>
+        <td><span>{{employee.cell_number}}</span></td>
+        <td><span>{{employee.department}}</span></td>
+        <td><span>{{employee.designation}}</span></td>
+        <td>
+          <span><a href="#" class="btn btn-success">Edit</a></span>
+        </td>
+        <td>
+          <span><a href="#" class="btn btn-danger">Delete</a></span>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

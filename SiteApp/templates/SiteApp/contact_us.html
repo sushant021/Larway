@@ -1,0 +1,121 @@
+{% extends "frontend_base.html" %} {% load static %}{% block header %}
+
+<div class="background" id="contactBackground">
+  <div class="layer">
+    {% include 'SiteApp/nav.html' %}
+    <div class="p-5 empty-space"></div>
+    <div class="text-center">
+      <p class="text-white page-title">Contact Us</p>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block content %} {% load crispy_forms_tags %}
+<div class="gap-4"></div>
+<div class="container">
+  <div
+    class="row"
+    style="background-color: #cc0477;box-shadow: rgba(0,0,0,1) 2px 2px 10px;"
+  >
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 bg-white">
+      <section class="p-3">
+        <h3 class="underline-left letter-spacing-1">Send Us Your Queries</h3>
+        <form action="{% url 'view_contact'%}" class="mt-4">
+          {{form | crispy}}
+          <input type="submit" value="Send Message" class="larway-btn" />
+        </form>
+      </section>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="gap-5"></div>
+      <section style="padding: 3rem 0rem 3rem 3rem;">
+        <h3 class="underline-left-white text-white letter-spacing-1">
+          Reach Out To Us
+        </h3>
+        <!-- contat details -->
+        <main class="my-5 font-size-125 letter-spacing-1">
+          <p>
+            <span
+              ><i
+                class=" fas fa-home text-white"
+                style="margin-right: 25px;"
+              ></i
+            ></span>
+            <span class="text-white"
+              >85 Ellis Drive,L4N 8Z3, Barrie, Ontario</span
+            >
+          </p>
+          <p>
+            <span
+              ><i
+                class=" fas fa-mobile-alt text-white"
+                style="margin-right: 35px;"
+              ></i
+            ></span>
+            <span class="text-white">Call Us: 705-739-1551</span>
+          </p>
+          <p>
+            <span
+              ><i
+                class=" fas fa-phone-alt text-white"
+                style="margin-right: 28px;"
+              ></i
+            ></span>
+            <span class="text-white">Toll Free:1800-263-7484</span>
+          </p>
+          <p>
+            <span
+              ><i class=" fas fa-fax text-white" style="margin-right: 30px;"></i
+            ></span>
+            <span class="text-white">Fax: 705-739-1530</span>
+          </p>
+        </main>
+
+        <h3 class="underline-left-white text-white letter-spacing-1">
+          Working Hours
+        </h3>
+        <!-- working hours -->
+        <main class="mt-5 font-size-125 letter-spacing-1 pr-5">
+          <ul class="text-white p-0" style="list-style-type:none;">
+            <li>
+              <span>Monday - Friday</span>
+              <span class="float-right">7 AM - 10 PM</span>
+            </li>
+            <li>
+              <span>Saturday</span>
+              <span class="float-right">8 AM - 6 PM</span>
+            </li>
+            <li>
+              <span>Sunday</span>
+              <span class="float-right">Closed</span>
+            </li>
+          </ul>
+        </main>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="gap-4"></div>
+
+<div class="container-fluid my-5">
+  <h3 class="underline-left">Find Us</h3>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="mapouter">
+        <div class="gmap_canvas">
+          <iframe
+            height="500"
+            width="100%"
+            id="gmap_canvas"
+            src="https://maps.google.com/maps?q=85%20Ellis%20Dr.%20&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'frontend_base.html' %} {% load static %}{% block header %}
+
+<div class="background" id="servicesBackground">
+  <div class="layer">
+    {% include 'SiteApp/nav.html' %}
+    <div class="p-5 empty-space"></div>
+    <div class="text-center">
+      <p class="text-white page-title">Our Services</p>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block content %}
+
+<div class="container">
+  <div class="gap-4"></div>
+  <h3 class="section-heading text-center">Where We Deliver</h3>
+
+  <img
+    src="{% static 'SiteApp/img/deliver_map.png' %}"
+    alt=""
+    class="img-fluid"
+  />
+  <article class="my-3 px-5">
+    <p class="px-5 lead text-center">
+      We run regular lanes to Texas, Louisiana, Georgia, Pennsylvania, New
+      Jersey, Maryland and North Carolina. With head office in Barrie, Ontario
+      and facilities in Sarnia and Brampton. We are here to take care of all
+      your shipping needs.
+    </p>
+  </article>
+</div>
+<div class="gap-5"></div>
+<div class="container-fluid p-5 bg-light">
+  <div class="row  text-center">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <img
+        src="{% static 'SiteApp/img/satellite.svg' %}"
+        alt=""
+        class="img-fluid"
+      />
+      <p class="text-uppercase my-3 bolder letter-spacing-1">
+        Satellite Tracked
+      </p>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <img
+        src="{% static 'SiteApp/img/trailer.svg' %}"
+        alt=""
+        class="img-fluid"
+      />
+      <p class="text-uppercase my-3 bolder letter-spacing-1">
+        Drop Trailer Services
+      </p>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <img
+        src="{% static 'SiteApp/img/hazard.svg' %}"
+        alt=""
+        class="img-fluid"
+      />
+      <p class="text-uppercase my-3 bolder letter-spacing-1">
+        Hazardous Materials
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row my-5 py-5">
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <div class="gap-3"></div>
+      <article class="service-description">
+        <p class="service-heading" id="truckloadService">Truckload</p>
+        <p class="mt-4 ">
+          Larway Transportation offers capacity and flexibility to keep your
+          volume shipments moving to and from any point in the U.S., Canada and
+          Mexico. With our asset-based fleet and a strong network of
+          transportation providers, we have the capacity and the flexibility to
+          handle any sort of truckload move you have. And because we adapt our
+          service to fit your needs, you can feel confident that you’re getting
+          the most efficient transportation solution available.
+        </p>
+        <div class="gap-1"></div>
+        <ul class=" p-0" style="list-style-type: none;">
+          <li class="mb-3">
+            <span class="service-icon"
+              ><i class="fas fa-truck-loading"></i
+            ></span>
+            Drop Trailer Services
+          </li>
+          <li class="mb-3">
+            <span class="service-icon"
+              ><i class="fas fa-truck-moving"></i
+            ></span>
+            USA and Canada Bonded Carrier
+          </li>
+          <li class="mb-3">
+            <span class="service-icon"><i class="fas fa-satellite"></i></span>
+            Satellite tracked shipments
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      {% load static%}
+      <img
+        src="{% static 'SiteApp/img/service-1.png'%}"
+        alt="Truckload Services"
+        class="img-fluid"
+      />
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row bg-light py-5">
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      {% load static%}
+      <img
+        src="{% static 'SiteApp/img/service-2.png'%}"
+        alt="Refrigerated and dry truckload services"
+        class="img-fluid"
+      />
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <article class="article-description p-5">
+        <p class="service-heading" id="dryvanService">Refrigerated and Dry Van</p>
+        <p class=" mt-4">
+          Our fleet includes <strong>multi-temp trailers</strong> designed to
+          achieve the “on Temp” requirements of your shipments.
+          Temperature-controlled services are ideal for shipments ranging from
+          frozen commodities to those needing protect-from-freeze service.
+        </p>
+        <div class="gap-1"></div>
+        <p class="">
+          Dry van trailers are the most common and safest way to transport
+          dry-goods, non-perishables and various types of equipment. Get your
+          free quote from us today. Just fill the quick form at the bottom of
+          the page.
+        </p>
+      </article>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row my-5 py-5">
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <article class="service-description">
+        <p class="service-heading" id="dedicatedService">
+          JUST-IN-TIME (JIT) - DEDICATED AND EXPEDITED
+        </p>
+        <p class=" mt-4">
+          We understand that time is money and sometimes your cargo needs to
+          arrive NOW! We have dedicated professionals who are trained to
+          understand your specific requirements and will ensure your cargo
+          arrive where and when you need it.
+        </p>
+      </article>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      {% load static%}
+      <img
+        src="{% static 'SiteApp/img/service-3.png'%}"
+        alt="Truckload Services"
+        class="img-fluid"
+      />
+    </div>
+  </div>
+</div>
+{% endblock %}

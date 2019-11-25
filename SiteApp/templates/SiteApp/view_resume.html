@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+	<h5 class="lead mb-3">Viewing Resume #{{ resume.id }}</h5>
+	<hr>
+	<p> Name:<span class="ml-2">{{resume.first_name}}</span> <span >{{resume.middle_name}}</span> <span>{{resume.last_name}}</span></p>
+	<p> Contact Number: {{resume.contact}}</p>
+	<p> Address: {{resume.address}}</p>
+	<p> Email: {{resume.email}}</p>
+	<p> Experience: <br>{{resume.experience}}</p>
+	<p> Cover Letter:<br> {{resume.cover_letter}}</p>
+	<p> References: <br>{{resume.references}}</p>
+</div>
+	
+{% endblock %}

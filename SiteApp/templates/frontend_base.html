@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %} Larway Transportation {% endblock %}</title>
+    {% load static %}
+
+    <!-- css links -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'SiteApp/css/style.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'SiteApp/css/owl.carousel.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'SiteApp/css/bootstrap.min.css' %}"
+    />
+
+    <!-- bootstrap links -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/ae06f41507.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'SiteApp/js/bootstrap.min.js' %}"></script>
+
+    <!-- Google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Baskervville|Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- owl carousel js -->
+    <script src="{% static 'SiteApp/js/owl.carousel.min.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      {% block header %} {% endblock %}
+    </header>
+
+    <div>
+      {% block content %} {% endblock %}
+    </div>
+
+    <footer class="bg-black">
+      <div class="container-fluid px-4 py-5">
+        <div class="row py-3 text-white">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <img
+              src="{% static 'SiteApp/img/confidence_in_motion.png' %}"
+              alt="Confidence In Motion"
+              width="200px"
+            />
+            <p class="text-white pt-4">
+              In a constantly changing and developing industry, one of Larway’s
+              most important qualities continues to be their word – and that
+              will never change.
+            </p>
+          </div>
+          <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            <p class="footer-heading">Useful Links</p>
+            <ul class="footer-list px-0 pt-4">
+              <li class="text-white footer-list-item">About</li>
+              <li class="text-white footer-list-item">Services</li>
+              <li class="text-white footer-list-item">Contact Us</li>
+              <li class="text-white footer-list-item">Quote Request</li>
+              <li class="text-white footer-list-item">Drive With Us</li>
+              {% comment %}
+              <li class="text-white footer-list-item">Fuel Surcharge</li>
+              {% endcomment %}
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <p class="footer-heading">Working Hours</p>
+            <div class="pt-4">
+              <ul
+                class="text-white pl-0 pr-4 footer-list"
+                style="list-style-type:none;"
+              >
+                <li
+                  class="footer-list-item pb-2"
+                  style="border-bottom:1px solid rgba(255,255,255,0.2);"
+                >
+                  <span>Monday - Friday</span>
+                  <span class="float-right">7 AM - 10 PM</span>
+                </li>
+                <li
+                  class="footer-list-item pb-2"
+                  style="border-bottom:1px solid rgba(255,255,255,0.2);"
+                >
+                  <span>Saturday</span>
+                  <span class="float-right">8 AM - 6 PM</span>
+                </li>
+                <li
+                  class="footer-list-item pb-2"
+                  style="border-bottom:1px solid rgba(255,255,255,0.2);"
+                >
+                  <span>Sunday</span>
+                  <span class="float-right">Closed</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <p class="footer-heading">Corporate Address</p>
+            <ul class="footer-list px-0 pt-4">
+              <li class="footer-list-item">
+                <span
+                  ><i class="fas fa-map-marker-alt text-white mr-3"></i
+                ></span>
+                85 Ellis Drive,L4N 8Z3, Barrie, ON
+              </li>
+              <li class="footer-list-item">
+                <span
+                  ><i class="fas fa-mobile-alt text-white mr-3"></i>Call Us:
+                  705-739-1551</span
+                >
+              </li>
+              <li class="footer-list-item">
+                <span
+                  ><i class="fas fa-phone-alt text-white mr-3"></i>Toll Free:
+                  1800-263-7484</span
+                >
+              </li>
+              <li>
+                <span><i class="fas fa-envelope text-white mr-3"></i></span
+                >Email: info@larway.com
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- owl carousel script -->
+
+    <script>
+      let owl = $(".owl-carousel");
+
+      owl.owlCarousel({
+        items: 5,
+        loop: true,
+        margin: 30,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplaySpeed: 2000,
+        autoplayHoverPause: true,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+
+            autoplay: true
+          },
+          600: {
+            items: 2,
+
+            autoplay: true
+          },
+          1000: {
+            loop: true,
+            autoplay: true
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

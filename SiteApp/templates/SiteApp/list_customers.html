@@ -1,0 +1,46 @@
+{% extends 'backend_base.html' %} {% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Our Customers</h3>
+    </div>
+    <div class="col-sm-6">
+      <a href="{% url 'add_customer' %}" class="btn btn-primary float-right"
+        >Add Customer</a
+      >
+    </div>
+  </div>
+  <div class="article">
+    <table class="table mt-4">
+      <tr>
+        <th>Id</th>
+        <th>Company Name</th>
+        <th>Key Person Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for customer in customers %}
+      <tr>
+        <td><span>{{customer.customer_id}}</span></td>
+        <td>
+          <a href="{{customer.get_absolute_url }}"
+            >{{customer.key_person_name}}
+          </a>
+        </td>
+        <td><span>{{customer.key_person_contact}}</span></td>
+        <td><span>{{customer.email}}</span></td>
+
+        <td>
+          <span><a href="#" class="btn btn-success">Edit</a></span>
+        </td>
+        <td>
+          <span><a href="#" class="btn btn-danger">Delete</a></span>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

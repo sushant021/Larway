@@ -1,0 +1,406 @@
+* {
+  font-family: "Noto Sans", sans-serif;
+  transition: all ease-in 0.2s;
+}
+/*theme colors*/
+.theme-color-primary {
+  color: rgba(204, 4, 119, 1);
+}
+/*typography */
+.font-size-125 {
+  font-size: 1.25em;
+}
+.font-size-15 {
+  font-size: 1.5em;
+}
+.font-size-175 {
+  font-size: 1.75em;
+}
+.font-size-2 {
+  font-size: 2em;
+}
+.font-size-25 {
+  font-size: 2.5em;
+}
+.font-size-275 {
+  font-size: 2.75;
+}
+.font-size-3 {
+  font-size: 3em;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
+.bolder {
+  font-weight: bolder;
+}
+/* letter spacing*/
+.letter-spacing-05 {
+  letter-spacing: 0.5px;
+}
+.letter-spacing-1 {
+  letter-spacing: 1px;
+}
+.letter-spacing-2 {
+  letter-spacing: 2px;
+}
+.letter-spacing-3 {
+  letter-spacing: 3px;
+}
+
+.line-height-3 {
+  line-height: 2em;
+}
+.border-radius-0 {
+  border-radius: 0 !important;
+}
+/* gap */
+.gap-1 {
+  height: 1em;
+}
+.gap-2 {
+  height: 2em;
+}
+.gap-3 {
+  height: 3em;
+}
+.gap-4 {
+  height: 4em;
+}
+.gap-5 {
+  height: 5em;
+}
+.gap-6 {
+  height: 6em;
+}
+.gap-7 {
+  height: 7em;
+}
+.gap-8 {
+  height: 8em;
+}
+.gap-9 {
+  height: 9em;
+}
+.gap-10 {
+  height: 10em;
+}
+.underline-left-white::after {
+  content: "";
+  height: 5px;
+  display: block;
+  background-color: rgba(255, 255, 255, 1);
+  width: 50px;
+  margin: 10px 0 0 0;
+}
+.underline-left::after {
+  content: "";
+  height: 5px;
+  display: block;
+  background-color: #cc0477;
+  width: 50px;
+  margin: 10px 0 0 0;
+}
+.underline-right::after {
+  content: "";
+  height: 5px;
+  display: block;
+  background-color: #cc0477;
+  width: 50px;
+  margin: 10px 0 0 0;
+}
+.larway-btn {
+  background-color: #cc0477;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+}
+.larway-btn:hover {
+  background-color: #9a055b;
+  text-decoration: none;
+  color: #fff;
+}
+.read-more {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #cc0477;
+}
+.bg-navbar {
+  background-color: #90909080;
+}
+.bg-black {
+  background-color: black !important;
+}
+.navbar-nav .nav-item .nav-link {
+  color: #fff;
+}
+/* overlay css */
+* {
+  font-family: "Noto Sans", sans-serif;
+  transition: all ease-in 0.2s;
+}
+
+.bg-image {
+  display: block;
+  width: 100%;
+}
+nav {
+  font-size: 0.9em;
+}
+nav a {
+  color: #fff;
+}
+/* nav a.active {
+  color: #c70e40;
+} */
+nav a:hover {
+  color: rgba(204, 4, 119, 1);
+  text-shadow: rgba(0, 0, 0, 1) 1px 1px 5px;
+  text-decoration: none;
+  /* border-bottom: 2px solid; */
+  font-weight: 600;
+}
+
+.log-in {
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+.log-in:hover {
+  background-color: rgba(204, 4, 119, 1);
+  color: #fff;
+  border: 1px solid rgba(204, 4, 119, 1);
+}
+.caption {
+  margin-top: 12%;
+}
+.title,
+.subtitle,
+.date {
+  color: #fff;
+}
+.caption .title {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+}
+.caption .subtitle {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.date {
+  display: inline-block;
+  margin-left: -520px;
+  background-color: rgba(204, 4, 119, 1);
+  padding: 5px 15px;
+  font-size: 1.3em;
+}
+.action-btn {
+  text-decoration: none;
+
+  padding: 15px 30px;
+}
+.action-btn:hover {
+  text-decoration: none;
+}
+.action-btn-1 {
+  border: 1px solid #fff;
+  color: #fff;
+}
+.action-btn:hover {
+  background-color: rgba(160, 6, 95, 1);
+  color: #fff;
+  border: 1px solid rgba(160, 6, 95, 1);
+}
+.action-btn-2 {
+  border: 1px solid rgba(204, 4, 119, 1);
+  color: #fff;
+  background-color: rgba(204, 4, 119, 1);
+}
+
+/* about section- homepage */
+#aboutSection {
+  background-image: url("../img/home_page_images/about_image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#aboutCaptionTitle {
+  font-size: 1.8em;
+  letter-spacing: 1px;
+}
+#aboutCaptionSubtitle {
+  font-size: 2em;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+/* feature section */
+/* #featureSection {
+  background-image: url("../img/home_page_images/featureSection_bg.jpg");
+} */
+/* section headings */
+.section-heading::after {
+  content: "";
+  height: 5px;
+  display: block;
+  background-color: #cc0477;
+  width: 50px;
+  margin: 10px auto 0 auto;
+}
+/*our services section */
+.services-title {
+  font-size: 2.5em;
+  font-weight: bolder;
+  margin-bottom: 2em;
+}
+.services-subtitle {
+  color: #000000bd;
+  margin-bottom: 0;
+  font-size: 1.5em;
+  font-weight: lighter;
+}
+/*professional service section */
+.service-description {
+  letter-spacing: 0.5px;
+}
+.service-heading {
+  font-size: 2em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.service-heading::after {
+  content: "";
+  height: 5px;
+  display: block;
+  background-color: #cc0477;
+  width: 50px;
+  margin-top: 1em;
+}
+/* contact-us page */
+
+/* login form */
+.login-section {
+  width: 50% !important;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 3em;
+  background-color: #423d3d;
+  color: #fff;
+  margin-top: 4em;
+}
+
+/* certification carousel */
+.carousel-img {
+  width: 250px;
+}
+
+/* footer styles */
+
+.footer-list {
+  list-style-type: none;
+}
+.footer-list-item {
+  margin: 10px 0px;
+}
+.footer-heading {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+.footer-heading::after {
+  content: "";
+  display: block;
+  background-color: rgba(204, 4, 119, 1);
+  height: 5px;
+  width: 10%;
+  position: relative;
+  top: 8px;
+}
+/* overlays for all pages */
+.background {
+  position: relative;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  border-radius: 0 0 150px 0;
+}
+.layer {
+  background-color: rgba(38, 67, 121, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 150px 0;
+}
+#homepageBackground {
+  background: url("../img/truck.png");
+  height: 700px;
+  border-radius: 0 !important;
+}
+#contactBackground {
+  background: url("../img/larway_team.jpg");
+  height: 400px;
+  background-position-y: -100px;
+}
+#aboutBackground {
+  background: url("../img/1a.jpg");
+  height: 400px;
+}
+#servicesBackground {
+  background: url("../img/service.jpg");
+  height: 400px;
+  background-position-y: -215px;
+}
+#quoteBackground {
+  background: url("../img/service.jpg");
+  height: 400px;
+}
+#journeyBackground {
+  background: url("../img/journey1.jpg");
+  height: 400px;
+  border-radius: 0 !important;
+  background-position-y: -470px;
+}
+#careerBackground {
+  background: url("../img/truck.png");
+  height: 400px;
+}
+/*page title and page captions*/
+.page-title {
+  font-weight: bolder;
+  text-transform: uppercase;
+  text-shadow: rgba(0, 0, 0, 1) 5px 5px 10px;
+  font-size: 3em;
+}
+
+/*backend menu */
+.backend-menu-item {
+  background-color: rgba(0, 0, 0, 1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  padding: 0.5em;
+}
+/* map */
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 500px;
+  width: 100%;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 500px;
+  width: 100%;
+}
+
+/*services page*/
+.service-icon {
+  background-color: rgba(204, 4, 119, 1);
+  padding: 10px;
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 1);
+  margin-right: 3rem;
+}

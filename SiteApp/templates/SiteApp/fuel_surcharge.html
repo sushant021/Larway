@@ -1,0 +1,116 @@
+{% extends "frontend_base.html" %} {% block content %}
+<div class="container my-4 py-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <article>
+        <h4>The diesel price for this week</h4>
+        <ul>
+          {% for key,value in price_dict.items %}
+          <li>
+            <strong>{{ key }} :&nbsp; &nbsp; &nbsp;</strong>${{ value }} per
+            gallon
+          </li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <h4>Calculate Fuel Surcharge</h4>
+      <form action="" id="surchargeForm" onsubmit="calculateResult()">
+        <div class="form-group">
+          <label for="indexPrice">Index</label>
+          <input
+            type="number"
+            name="index-price"
+            id="indexPrice"
+            class="form-control"
+            value="3.041"
+          />
+        </div>
+        <div class="form-group">
+          <label for="currentPrice">Current Price</label>
+          <input
+            type="number"
+            name="current-price"
+            id="currentPrice"
+            class="form-control"
+            value="3.051"
+          />
+        </div>
+
+        <div class="form-group">
+          <!-- <label for="milage">Mileage</label> -->
+          <input
+            type="hidden"
+            name="mileage"
+            id="mileage"
+            class="form-control"
+            value="5.5"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="submit"
+            value="Get Surcharge"
+            class="btn btn-primary"
+            class="form-control"
+          />
+        </div>
+      </form>
+      <div class="result-section" id="resultSection">
+        <p id="result"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document
+    .getElementById("surchargeForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+      calculateResult();
+    });
+  function calculateResult() {
+    let indexPrice = document.getElementById("indexPrice").value;
+    let currentPrice = document.getElementById("currentPrice").value;
+    let mileage = document.getElementById("mileage").value;
+    let surcharge = ((currentPrice - indexPrice) / mileage) * 100;
+
+    document.getElementById("result").innerHTML =
+      "Surcharge is " + surcharge + " %";
+  }
+</script>
+
+<!-- <table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+    </tbody>
+</table> -->
+{% endblock %}
