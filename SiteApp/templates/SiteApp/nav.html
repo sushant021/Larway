@@ -1,6 +1,7 @@
 {% load static %}
 <div
-  class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 mt-4 mx-3"
+  class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 mt-4 mx-3 "
+  id="mainMenuBar"
 >
   <h5 class="my-0 mr-md-auto ">
     <a href="{% url 'index' %}"
@@ -32,3 +33,59 @@
     </a>
   </nav>
 </div>
+
+<!-- mobile menu -->
+<section class="mobile-menubar bg-black-light">
+  <div class="logo" style="display:inline-block; margin:0 10px;">
+    <img src="{% static 'SiteApp/img/logo.png' %}" alt="Larway" width="150px" />
+  </div>
+
+  <div class="menu-toggler" onClick="showMobileMenu()" id="menuToggler">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a onClick="closeMobileMenu()" style="color:#fff;float:right;margin:0 10px;"
+      ><span><i class="fas fa-times"></i></span
+    ></a>
+    <ul class="pl-0 pt-4" style="list-style-type:none;">
+      <li class="mobile-menu-item">
+        <a href="{% url 'index' %}" class="mobile-menu-link">Home</a>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="{% url 'view_about' %}" class="mobile-menu-link">About Us</a>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="{% url 'view_contact' %}" class="mobile-menu-link"
+          >Contact Us</a
+        >
+      </li>
+      <li class="mobile-menu-item">
+        <a href="{% url 'view_services' %}" class="mobile-menu-link"
+          >Services</a
+        >
+      </li>
+      <li class="mobile-menu-item">
+        <a href="{% url 'request_quote' %}" class="mobile-menu-link"
+          >Request Quote</a
+        >
+      </li>
+      <li class="mobile-menu-item">
+        <a href="{% url 'drive_with_us' %}" class="mobile-menu-link"
+          >Drive With Us</a
+        >
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  function showMobileMenu() {
+    document.getElementById("mobileMenu").style.display = "block";
+    document.getElementById("menuToggler").style.display="none";
+
+  }
+  function closeMobileMenu() {
+    document.getElementById("mobileMenu").style.display = "none";
+    document.getElementById("menuToggler").style.display="block";
+  }
+</script>
