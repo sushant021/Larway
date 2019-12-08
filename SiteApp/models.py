@@ -77,3 +77,7 @@ class DriverResume(models.Model):
 
     def get_absolute_url(self):
         return reverse('view_resume', args=[self.id])
+
+
+class FuelSurcharge(models.Model):
+    input_diesel_price = models.FloatField()

@@ -372,6 +372,10 @@ nav a:hover {
   background: url("../img/truck.png");
   height: 400px;
 }
+#surchargeBackground {
+  background: url("../img/fuel_surcharge_bg.jpg");
+  height: 400px;
+}
 /*page title and page captions*/
 .page-title {
   font-weight: bolder;

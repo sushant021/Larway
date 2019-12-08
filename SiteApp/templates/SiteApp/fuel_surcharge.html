@@ -1,14 +1,71 @@
-{% extends "frontend_base.html" %} {% block content %}
+{% extends "frontend_base.html" %} {% load static %} {% load crispy_forms_tags %} {% block header %}
+
+<div class="background" id="surchargeBackground">
+  <div class="layer">
+    {% include 'SiteApp/nav.html' %}
+    <div class="p-5 empty-space"></div>
+    <div class="text-center">
+      <p class="text-white page-title">Fuel Surcharge</p>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block content %}
 <div class="container my-4 py-4">
+  <div class="gap-2"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        Our fuel surcharge schedule is updated every Monday. The schedule is
+        based on the National Average Diesel Fuel Index published by the Energy
+        Information Administration of the U.S. Department of Energy (DOE) which
+        can be accessed at
+        <a href="https://www.eia.gov/petroleum/gasdiesel/"
+          >U.S. Energy Information Administraion website.</a
+        >.
+      </p>
+      <p>
+        As, of {{last_date}}, the U.S. National Average cost of fuel is:
+        {{us_price}}. And the fuel surcharge rates are as follows:
+      </p>
+      <div class="gap-2"></div>
+
+      <!-- surcharge rates for this week -->
+      <table class="table">
+        <thead>
+          <tr class="bg-light">
+            <th scope="col">Truckload (TL)</th>
+            <th scope="col">Less Than Truckload (LTL)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-light">
+            <td>{{tl_surcharge}} %</td>
+            <td>{{ltl_surcharge}} %</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="gap-4"></div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
       <article>
-        <h4>The diesel price for this week</h4>
-        <ul>
+        <h4 class="underline-left">
+          U.S. On-Highway Diesel Fuel Prices
+        </h4>
+        <div class="gap-1"></div>
+        <p class="small">
+          By U.S. Energy Information Administration. Prices are in dollars per
+          gallon.
+        </p>
+        <div class="gap-1"></div>
+        <ul class="list-group">
           {% for key,value in price_dict.items %}
-          <li>
-            <strong>{{ key }} :&nbsp; &nbsp; &nbsp;</strong>${{ value }} per
-            gallon
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            {{key}}
+            <span class="badge badge-primary badge-pill">{{value}}</span>
           </li>
           {% endfor %}
         </ul>
@@ -16,55 +73,25 @@
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-      <h4>Calculate Fuel Surcharge</h4>
-      <form action="" id="surchargeForm" onsubmit="calculateResult()">
-        <div class="form-group">
-          <label for="indexPrice">Index</label>
-          <input
-            type="number"
-            name="index-price"
-            id="indexPrice"
-            class="form-control"
-            value="3.041"
-          />
-        </div>
-        <div class="form-group">
-          <label for="currentPrice">Current Price</label>
-          <input
-            type="number"
-            name="current-price"
-            id="currentPrice"
-            class="form-control"
-            value="3.051"
-          />
-        </div>
-
-        <div class="form-group">
-          <!-- <label for="milage">Mileage</label> -->
-          <input
-            type="hidden"
-            name="mileage"
-            id="mileage"
-            class="form-control"
-            value="5.5"
-          />
-        </div>
-
-        <div class="form-group">
-          <input
-            type="submit"
-            value="Get Surcharge"
-            class="btn btn-primary"
-            class="form-control"
-          />
-        </div>
+      <h4 class="underline-left">Calculate Fuel Surcharge</h4>
+      <div class="gap-2"></div>
+      <form action="{% url 'fuel_surcharge' %}" method="post">
+        {{ form | crispy }} {% csrf_token %}
+        <input type="submit" value="Get Surcharge Rates" class="larway-btn" />
       </form>
-      <div class="result-section" id="resultSection">
-        <p id="result"></p>
-      </div>
+      <div class="gap-2"></div>
+
+      
+      {% if form_tl_surcharge != 0 %}
+      <p>Truckload Surcharge Rate: {{form_tl_surcharge}} %</p>
+      <p>Less Than Truckload Surcharge Rate: {{form_ltl_surcharge}} %</p>
+      {% endif %}
     </div>
   </div>
 </div>
+<div class="gap-4"></div>
+
+<!-- script for the calculator -->
 <script>
   document
     .getElementById("surchargeForm")

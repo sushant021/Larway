@@ -1,5 +1,5 @@
 {% extends 'frontend_base.html' %} {% block content %} {% load static %}
-<div class="container p-5 login-section ">
+<div class="container p-5 login-section "  style="border-radius:3em;">
   <p class="text-center">
     <a href="{% url 'index' %}"
       ><img src="{% static 'SiteApp/img/logo.png'%}" alt="" width="350px"
@@ -17,4 +17,8 @@
   </form>
 </div>
 <div class="gap-4"></div>
+
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
