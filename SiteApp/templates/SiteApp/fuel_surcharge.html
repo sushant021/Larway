@@ -1,4 +1,7 @@
-{% extends "frontend_base.html" %} {% load static %} {% load crispy_forms_tags %} {% block header %}
+{% extends 'frontend_base.html' %} 
+{% load static %}
+ 
+{% block header %}
 
 <div class="background" id="surchargeBackground">
   <div class="layer">
@@ -9,7 +12,9 @@
     </div>
   </div>
 </div>
-{% endblock %} {% block content %}
+
+{% endblock %}
+{% block content %}
 <div class="container my-4 py-4">
   <div class="gap-2"></div>
   <div class="row">
@@ -71,7 +76,8 @@
         </ul>
       </article>
     </div>
-
+    
+    {% load crispy_forms_tags %}
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
       <h4 class="underline-left">Calculate Fuel Surcharge</h4>
       <div class="gap-2"></div>
@@ -91,53 +97,6 @@
 </div>
 <div class="gap-4"></div>
 
-<!-- script for the calculator -->
-<script>
-  document
-    .getElementById("surchargeForm")
-    .addEventListener("submit", function(event) {
-      event.preventDefault();
-      calculateResult();
-    });
-  function calculateResult() {
-    let indexPrice = document.getElementById("indexPrice").value;
-    let currentPrice = document.getElementById("currentPrice").value;
-    let mileage = document.getElementById("mileage").value;
-    let surcharge = ((currentPrice - indexPrice) / mileage) * 100;
 
-    document.getElementById("result").innerHTML =
-      "Surcharge is " + surcharge + " %";
-  }
-</script>
 
-<!-- <table class="table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-    </tbody>
-</table> -->
 {% endblock %}

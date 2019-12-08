@@ -119,7 +119,7 @@ def FuelSurcharge(request):
             form_ltl_surcharge = get_surcharge_rate(input_price, 3)
         else:
             return HttpResponse("Invalid Form Request.")
-        
+
     else:
         form = FuelSurchargeForm()
 
@@ -130,7 +130,7 @@ def FuelSurcharge(request):
                           'ltl_surcharge': ltl_surcharge,
                           'form_tl_surcharge': form_tl_surcharge,
                           'form_ltl_surcharge': form_ltl_surcharge,
-                          'form':form}
+                          'form': form}
 
     return render(request, 'Siteapp/fuel_surcharge.html', context_dictionary)
 
