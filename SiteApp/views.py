@@ -132,7 +132,7 @@ def FuelSurcharge(request):
                           'form_ltl_surcharge': form_ltl_surcharge,
                           'form': form}
 
-    return render(request, 'Siteapp/fuel_surcharge.html', context_dictionary)
+    return render(request, 'SiteApp/fuel_surcharge.html', context_dictionary)
 
 
 def ListEmployees(request):
