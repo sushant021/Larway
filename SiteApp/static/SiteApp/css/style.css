@@ -426,7 +426,13 @@ nav a:hover {
   float: right;
   right: 10px;
   top: 10px;
-  color: #fff;
+  color: rgba(255, 255, 255, 1);
+}
+.backend-menu-toggler {
+  position: relative;
+  float: right;
+  top: 10px;
+  color: rgba(0, 0, 0, 1);
 }
 .mobile-menubar {
   display: none;
@@ -445,6 +451,15 @@ nav a:hover {
 }
 .mobile-menu-link {
   color: rgba(255, 255, 255, 1);
+}
+
+/* backend admin section */
+.backend-content {
+  position: absolute !important;
+  right: 0;
+}
+#backendMenu {
+  position: fixed;
 }
 
 /* media screens for responsiveness */
@@ -469,5 +484,13 @@ nav a:hover {
   }
   .mobile-view {
     display: block;
+  }
+  #backendMenu {
+    display: none !important;
+  }
+
+  .backend-content {
+    position: relative !important;
+    right: unset;
   }
 }

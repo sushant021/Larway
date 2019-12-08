@@ -4,6 +4,7 @@ from .models import QuoteRequest, DriverResume, Employee, Customer, FuelData, Fu
 from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm, FuelDataForm
 from django.contrib.auth import logout
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.auth.decorators import login_required
 
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -43,16 +44,16 @@ def UserLogout(request):
     logout(request)
     return redirect('/')
 
-
+@login_required
 def UserDashBoard(request):
     return render(request, 'SiteApp/dashboard.html')
 
-
+@login_required
 def ViewQuoteRequests(request):
     quote_requests = QuoteRequest.objects.all()
     return render(request, 'SiteApp/list_quote_requests.html', {'quote_requests': quote_requests})
 
-
+@login_required
 def ViewDriverResumes(request):
     resumes = DriverResume.objects.all()
     return render(request, 'SiteApp/list_driver_resumes.html', {'resumes': resumes})
@@ -83,17 +84,17 @@ def RequestQuote(request):
         form = QuoteRequestForm()
         return render(request, 'SiteApp/quote_request.html', {'form': form})
 
-
+@login_required
 def ViewQuote(request, id):
     quote = QuoteRequest.objects.get(id=id)
     return render(request, 'SiteApp/view_quote.html', {'quote': quote})
 
-
+@login_required
 def ViewResume(request, id):
     resume = DriverResume.objects.get(id=id)
     return render(request, 'SiteApp/view_resume.html', {'resume': resume})
 
-
+@login_required
 def FuelSurcharge(request):
     # scrape the data off the EIA website
     data = scrape_data()
@@ -134,12 +135,12 @@ def FuelSurcharge(request):
 
     return render(request, 'SiteApp/fuel_surcharge.html', context_dictionary)
 
-
+@login_required
 def ListEmployees(request):
     employees = Employee.objects.all()
     return render(request, 'SiteApp/list_employees.html', {'employees': employees})
 
-
+@login_required
 def AddEmployee(request):
     if request.method == "POST":
         form = EmployeeForm(request.POST)
@@ -152,20 +153,20 @@ def AddEmployee(request):
         form = EmployeeForm()
         return render(request, 'SiteApp/add_employee.html', {'form': form})
 
-
+@login_required
 def EditEmployee(request, id):
     pass
 
-
+@login_required
 def DeleteEmployee(request, id):
     pass
 
-
+@login_required
 def ListCustomers(request):
     customers = Customer.objects.all()
     return render(request, 'SiteApp/list_customers.html', {'customers': customers})
 
-
+@login_required
 def AddCustomer(request):
     if request.method == "POST":
         form = CustomerForm(request.POST)
@@ -178,15 +179,15 @@ def AddCustomer(request):
         form = CustomerForm()
         return render(request, 'SiteApp/add_customer.html', {'form': form})
 
-
+@login_required
 def EditCustomer(request, id):
     pass
 
-
+@login_required
 def DeleteCustomer(request, id):
     pass
 
-
+@login_required
 def FuelData(request):
     if request.method == "POST":
         form = FuelDataForm(request.POST)

@@ -1,34 +1,13 @@
-{% extends 'frontend_base.html' %} 
+{% extends 'backend_base.html' %} 
 {% load static %}
  
-{% block header %}
 
-<div class="background" id="surchargeBackground">
-  <div class="layer">
-    {% include 'SiteApp/nav.html' %}
-    <div class="p-5 empty-space"></div>
-    <div class="text-center">
-      <p class="text-white page-title">Fuel Surcharge</p>
-    </div>
-  </div>
-</div>
-
-{% endblock %}
 {% block content %}
 <div class="container my-4 py-4">
-  <div class="gap-2"></div>
+  <div class="gap-2 mobile-view"></div>
   <div class="row">
     <div class="col-sm-12">
-      <p>
-        Our fuel surcharge schedule is updated every Monday. The schedule is
-        based on the National Average Diesel Fuel Index published by the Energy
-        Information Administration of the U.S. Department of Energy (DOE) which
-        can be accessed at
-        <a href="https://www.eia.gov/petroleum/gasdiesel/"
-          >U.S. Energy Information Administraion website.</a
-        >.
-      </p>
-      <p>
+      
         As, of {{last_date}}, the U.S. National Average cost of fuel is:
         {{us_price}}. And the fuel surcharge rates are as follows:
       </p>

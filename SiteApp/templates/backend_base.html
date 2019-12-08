@@ -40,7 +40,10 @@
   <body class="h-100">
     <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="cols-sm-12 col-md-2 col-lg-2 col-xl-2 pl-0 h-100 bg-black" style="position:fixed;">
+        <div
+          class="cols-sm-12 col-md-2 col-lg-2 col-xl-2 pl-0 h-100 bg-black"
+          id="backendMenu"
+        >
           <ul class="list-group" style="list-style-type: none;">
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'dashboard' %}"
@@ -53,6 +56,11 @@
               >
             </li>
             <li class="nav-item backend-menu-item">
+              <a class="nav-link text-white" href="{% url 'fuel_surcharge' %}"
+                >Fuel Surcharge</a
+              >
+            </li>
+            <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'list_customers' %}"
                 >Customers</a
               >
@@ -62,9 +70,7 @@
                 >HR</a
               >
             </li>
-            <li class="nav-item backend-menu-item">
-              <a class="nav-link text-white" href="#">Sales</a>
-            </li>
+
             <li class="nav-item backend-menu-item">
               <a
                 class="nav-link text-white"
@@ -72,7 +78,7 @@
                 >Quote Requests</a
               >
             </li>
-            
+
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'view_resumes' %}"
                 >View Resumes</a
@@ -85,10 +91,101 @@
             </li>
           </ul>
         </div>
-        <div class="col-sm-12 col-md-10 col-lg-10 col-xl-10 h-100" style="position:absolute;right:0;">
+        <!-- mobile menu -->
+
+        <section class="mobile-menubar bg-black-light col-12">
+          <div
+            class="backend-menu-toggler"
+            onClick="showMobileMenu()"
+            id="menuToggler"
+          >
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="mobile-menu" id="mobileMenu">
+            <a
+              onClick="closeMobileMenu()"
+              style="color:rgba(255,255,255,1);float:right; right:30px;position:relative;top:10px;"
+              ><span><i class="fas fa-times"></i></span
+            ></a>
+            <ul class="pl-0 pt-4" style="list-style-type:none;">
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'dashboard' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Dashboard</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'fuel_data' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Calculator</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'fuel_surcharge' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Fuel Surcharge</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'list_customers' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Customers</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'list_employees' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Employees</a
+                >
+              </li>
+
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'view_quote_requests' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Quote Requests</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'view_resumes' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >View Resumes</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'logout' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Log Out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- content -->
+        <div
+          class="col-sm-12 col-md-10 col-lg-10 col-xl-10 h-100 backend-content"
+        >
           {% block content %}{% endblock %}
         </div>
       </div>
     </div>
   </body>
+  <script>
+    function showMobileMenu() {
+      document.getElementById("mobileMenu").style.display = "block";
+      document.getElementById("menuToggler").style.display = "none";
+    }
+    function closeMobileMenu() {
+      document.getElementById("mobileMenu").style.display = "none";
+      document.getElementById("menuToggler").style.display = "block";
+    }
+  </script>
 </html>
