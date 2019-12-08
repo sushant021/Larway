@@ -68,7 +68,7 @@ class DriverResume(models.Model):
     address = models.CharField(max_length=100)
     contact = models.BigIntegerField()
     email = models.EmailField()
-    experience = models.TextField()  # provide all your experiences
+    experience = models.TextField()
     cover_letter = models.TextField()
     references = models.TextField()
 
