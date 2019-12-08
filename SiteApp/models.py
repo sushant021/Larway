@@ -81,3 +81,13 @@ class DriverResume(models.Model):
 
 class FuelSurcharge(models.Model):
     input_diesel_price = models.FloatField()
+
+
+class FuelData(models.Model):
+    surcharge_percentage = models.FloatField(blank=True, default=0.00)
+    surcharge_per_mile = models.FloatField(blank=True, default=0.00)
+    miles = models.FloatField(blank=True, default=0.00)
+    rate_per_mile = models.FloatField(blank=True, default=0.00)
+    surcharge_amount = models.FloatField(blank=True, default=0.00)
+    linehaul_amount = models.FloatField(blank=True, default=0.00)
+    total_amount = models.FloatField(blank=True, default=0.00)

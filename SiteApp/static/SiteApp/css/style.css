@@ -413,6 +413,12 @@ nav a:hover {
   color: rgba(255, 255, 255, 1);
   margin-right: 3rem;
 }
+
+/* responsive */
+.mobile-view {
+  display: none;
+}
+
 /* mobile menu */
 
 .menu-toggler {
@@ -459,6 +465,9 @@ nav a:hover {
     display: none !important;
   }
   .mobile-menubar {
+    display: block;
+  }
+  .mobile-view {
     display: block;
   }
 }

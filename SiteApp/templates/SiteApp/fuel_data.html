@@ -1,0 +1,35 @@
+{% extends 'backend_base.html' %} {% load crispy_forms_tags %} {% block content%}
+<div class="container py-3">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <h4 class="underline-left">Calculator</h4>
+      
+      <form action="{% url 'fuel_data' %}" method="post">
+        {{ form | crispy }} {% csrf_token %}
+        <input type="submit" name="Submit" class="larway-btn" />
+      </form>
+    </div>
+    <div class="mobile-view gap-2"></div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      {% if flag %}
+        <section>
+        <h4 class="underline-left">Result</h4>
+        <div class="gap-2"></div>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if total != 0 %} Total Cost: <span class="badge badge-primary badge-pill"> {{total}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if line_haul != 0 %} Linehaul: <span class="badge badge-primary badge-pill"> {{line_haul}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_amt != 0 %} FSC Amount: <span class="badge badge-primary badge-pill"> {{fsc_amt}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_percent != 0 %} FSC Percentage: <span class="badge badge-primary badge-pill"> {{fsc_percent}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_dollar != 0 %} FSC per mile: <span class="badge badge-primary badge-pill"> {{fsc_dollar}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if rpm != 0 %} Rate per mile: <span class="badge badge-primary badge-pill"> {{rpm}} </span>  {% endif %}</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if miles != 0 %} Miles Travelled: <span class="badge badge-primary badge-pill"> {{miles}} </span>  {% endif %}</li>
+        </ul>
+        
+
+      </section>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

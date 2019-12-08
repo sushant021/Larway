@@ -40,11 +40,16 @@
   <body class="h-100">
     <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="cols-sm-12 col-md-2 col-lg-2 col-xl-2 pl-0 h-100 bg-black">
+        <div class="cols-sm-12 col-md-2 col-lg-2 col-xl-2 pl-0 h-100 bg-black" style="position:fixed;">
           <ul class="list-group" style="list-style-type: none;">
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'dashboard' %}"
                 >Dashboard</a
+              >
+            </li>
+            <li class="nav-item backend-menu-item">
+              <a class="nav-link text-white" href="{% url 'fuel_data' %}"
+                >Calculator</a
               >
             </li>
             <li class="nav-item backend-menu-item">
@@ -67,6 +72,7 @@
                 >Quote Requests</a
               >
             </li>
+            
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'view_resumes' %}"
                 >View Resumes</a
@@ -79,7 +85,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-sm-12 col-md-10 col-lg-10 col-xl-10 h-100">
+        <div class="col-sm-12 col-md-10 col-lg-10 col-xl-10 h-100" style="position:absolute;right:0;">
           {% block content %}{% endblock %}
         </div>
       </div>

@@ -20,6 +20,7 @@ urlpatterns = [
     path('view-resumes/', views.ViewDriverResumes, name='view_resumes'),
     path('view-quote/<int:id>/', views.ViewQuote, name='view_quote'),
     path('view-resume/<int:id>/', views.ViewResume, name='view_resume'),
+    path('calculator/', views.FuelData, name='fuel_data'),
 
     # authentication
     path('login/', auth_views.LoginView.as_view(), name='login'),
@@ -36,5 +37,6 @@ urlpatterns = [
     path('customers/', views.ListCustomers, name='list_customers'),
     path('customer/delete', views.DeleteCustomer, name='delete_customers'),
     path('customer/edit', views.EditCustomer, name='edit_customers'),
+
 
 ]

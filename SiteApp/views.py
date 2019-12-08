@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import QuoteRequest, DriverResume, Employee, Customer
-from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm
+from .models import QuoteRequest, DriverResume, Employee, Customer, FuelData, FuelSurcharge
+from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm, FuelDataForm
 from django.contrib.auth import logout
 from django.contrib.staticfiles.storage import staticfiles_storage
 
@@ -187,9 +187,29 @@ def DeleteCustomer(request, id):
     pass
 
 
+def FuelData(request):
+    if request.method == "POST":
+        form = FuelDataForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            # calculate values
+            context_dict = get_fuel_values(cd)
+            flag = True
+            context_dict.update({'flag':flag, 'form':form})
+
+        else:
+            return HttpResponse("Invalid form submission.")
+    else:
+        form = FuelDataForm()
+        context_dict = {'form': form}
+
+    return render(request, 'SiteApp/fuel_data.html', context_dict)
+
 # takes current fuel price in us gallons and a column number to return TL and LTL surcharge rates
 # based on L2011 schedule of Larway
 # column number is either 2 or 3 , 2 is for TL and 3 is for LTL
+
+
 def get_surcharge_rate(fuel_price, col_num):
     try:
         p = staticfiles_storage.path('data/surcharge_table.csv')
@@ -248,3 +268,66 @@ def scrape_data():
 
     # floats[0] is the average U.S. price, last_date is the last update date.
     return [price_dict, float(floats[0]), last_date]
+
+
+# inputs cleaned data from a form of caluclator and returns all the values in a dictionary
+def get_fuel_values(cd):
+    fsc_percent = cd['surcharge_percentage']
+    fsc_dollar = cd['surcharge_per_mile']
+    miles = cd['miles']
+    rpm = cd['rate_per_mile']
+    line_haul = cd['linehaul_amount']
+    fsc_amt = cd['surcharge_amount']
+    total = cd['total_amount']
+
+    if line_haul == 0 or None:
+        if rpm != 0 and miles != 0:
+            line_haul = rpm * miles
+        if total != 0 and fsc_amt != 0:
+            line_haul = total - fsc_amt
+
+    if fsc_percent != 0 and fsc_dollar != 0:
+        fsc_amt = miles * fsc_dollar
+    elif fsc_dollar != 0:
+        fsc_amt = miles * fsc_dollar
+    elif fsc_percent != 0:
+        fsc_amt = line_haul * (fsc_percent/100)
+
+    if total == 0 or None:
+        if fsc_amt != 0 and line_haul != 0:
+            total = fsc_amt + line_haul
+
+    if fsc_percent == 0 or None:
+        if fsc_amt != 0 and line_haul != 0:
+            fsc_percent = (fsc_amt/line_haul)
+
+    if fsc_dollar == 0 or None:
+        if fsc_amt != 0 and miles != 0:
+            fsc_dollar = fsc_amt / miles
+
+    if fsc_amt != 0 and total != 0:
+        if fsc_amt != 0 and total != 0:
+            fsc_percent = (fsc_amt / (total-fsc_amt)) * 100
+
+    if line_haul == 0 or None:
+        if total != 0 and fsc_amt != 0:
+            line_haul = total - fsc_amt
+
+    if rpm == 0 or None:
+        if line_haul != 0 and miles != 0:
+            rpm = line_haul / miles
+
+    if miles == 0 or None:
+        if line_haul != 0 and rpm != 0:
+            miles = line_haul / rpm
+
+    context_dict = {'fsc_amt': round(fsc_amt,3),
+                    'line_haul': round(line_haul,3),
+                    'fsc_percent': round(fsc_percent,3),
+                    'fsc_dollar': round(fsc_dollar,3),
+                    'total': round(total,3),
+                    'miles': round(miles,3),
+                    'rpm': round(rpm,3),
+                    }
+
+    return context_dict

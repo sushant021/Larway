@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from . models import QuoteRequest, DriverResume, Employee, Customer, FuelSurcharge
+from . models import QuoteRequest, DriverResume, Employee, Customer, FuelSurcharge, FuelData
 
 
 class QuoteRequestForm(ModelForm):
@@ -29,4 +29,10 @@ class CustomerForm(ModelForm):
 class FuelSurchargeForm(ModelForm):
     class Meta:
         model = FuelSurcharge
+        fields = '__all__'
+
+
+class FuelDataForm(ModelForm):
+    class Meta:
+        model = FuelData
         fields = '__all__'
