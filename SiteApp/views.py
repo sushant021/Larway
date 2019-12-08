@@ -280,7 +280,28 @@ def get_fuel_values(cd):
     fsc_amt = cd['surcharge_amount']
     total = cd['total_amount']
 
-    if line_haul == 0 or None:
+    if fsc_percent == 0:
+        fsc_percent = 0.0
+    
+    if fsc_dollar == 0:
+        fsc_dollar = 0.0
+
+    if miles == 0:
+        miles = 0.0
+
+    if rpm == 0:
+        rpm = 0.0
+
+    if line_haul == 0:
+        line_haul = 0.0
+
+    if fsc_amt == 0:
+        fsc_amt = 0.0
+    
+    if total == 0:
+        total = 0.0
+
+    if line_haul == 0 :
         if rpm != 0 and miles != 0:
             line_haul = rpm * miles
         if total != 0 and fsc_amt != 0:
@@ -293,15 +314,15 @@ def get_fuel_values(cd):
     elif fsc_percent != 0:
         fsc_amt = line_haul * (fsc_percent/100)
 
-    if total == 0 or None:
+    if total == 0 :
         if fsc_amt != 0 and line_haul != 0:
             total = fsc_amt + line_haul
 
-    if fsc_percent == 0 or None:
+    if fsc_percent == 0 :
         if fsc_amt != 0 and line_haul != 0:
             fsc_percent = (fsc_amt/line_haul)
 
-    if fsc_dollar == 0 or None:
+    if fsc_dollar == 0 :
         if fsc_amt != 0 and miles != 0:
             fsc_dollar = fsc_amt / miles
 
@@ -309,15 +330,15 @@ def get_fuel_values(cd):
         if fsc_amt != 0 and total != 0:
             fsc_percent = (fsc_amt / (total-fsc_amt)) * 100
 
-    if line_haul == 0 or None:
+    if line_haul == 0 :
         if total != 0 and fsc_amt != 0:
             line_haul = total - fsc_amt
 
-    if rpm == 0 or None:
+    if rpm == 0 :
         if line_haul != 0 and miles != 0:
             rpm = line_haul / miles
 
-    if miles == 0 or None:
+    if miles == 0 :
         if line_haul != 0 and rpm != 0:
             miles = line_haul / rpm
 

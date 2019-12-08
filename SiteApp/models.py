@@ -84,10 +84,12 @@ class FuelSurcharge(models.Model):
 
 
 class FuelData(models.Model):
-    surcharge_percentage = models.FloatField(blank=True, default=0.00)
-    surcharge_per_mile = models.FloatField(blank=True, default=0.00)
-    miles = models.FloatField(blank=True, default=0.00)
-    rate_per_mile = models.FloatField(blank=True, default=0.00)
-    surcharge_amount = models.FloatField(blank=True, default=0.00)
-    linehaul_amount = models.FloatField(blank=True, default=0.00)
-    total_amount = models.FloatField(blank=True, default=0.00)
+    surcharge_percentage = models.FloatField(
+        blank=False, default=0.00, null=False)
+    surcharge_per_mile = models.FloatField(
+        blank=False, null=False, default=0.00)
+    miles = models.FloatField(blank=False, null=False, default=0.00)
+    rate_per_mile = models.FloatField(blank=False, null=False, default=0.00)
+    surcharge_amount = models.FloatField(blank=False, null=False, default=0.00)
+    linehaul_amount = models.FloatField(blank=False, null=False, default=0.00)
+    total_amount = models.FloatField(blank=False, null=False, default=0.00)

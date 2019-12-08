@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
       <h4 class="underline-left">Calculator</h4>
-      
+
+      <p class="small">** Leave 0 if you don't have value.</p>
       <form action="{% url 'fuel_data' %}" method="post">
         {{ form | crispy }} {% csrf_token %}
         <input type="submit" name="Submit" class="larway-btn" />
@@ -16,13 +17,13 @@
         <h4 class="underline-left">Result</h4>
         <div class="gap-2"></div>
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if total != 0 %} Total Cost: <span class="badge badge-primary badge-pill"> {{total}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if line_haul != 0 %} Linehaul: <span class="badge badge-primary badge-pill"> {{line_haul}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_amt != 0 %} FSC Amount: <span class="badge badge-primary badge-pill"> {{fsc_amt}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_percent != 0 %} FSC Percentage: <span class="badge badge-primary badge-pill"> {{fsc_percent}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if fsc_dollar != 0 %} FSC per mile: <span class="badge badge-primary badge-pill"> {{fsc_dollar}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if rpm != 0 %} Rate per mile: <span class="badge badge-primary badge-pill"> {{rpm}} </span>  {% endif %}</li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> {% if miles != 0 %} Miles Travelled: <span class="badge badge-primary badge-pill"> {{miles}} </span>  {% endif %}</li>
+             {% if total != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> Total Cost: <span class="badge badge-primary badge-pill"> {{total}} </span>  </li> {% endif %}
+             {% if line_haul != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> Linehaul: <span class="badge badge-primary badge-pill"> {{line_haul}} </span>  </li> {% endif %}
+             {% if fsc_amt != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> FSC Amount: <span class="badge badge-primary badge-pill"> {{fsc_amt}} </span>  </li> {% endif %}
+             {% if fsc_percent != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> FSC Percentage: <span class="badge badge-primary badge-pill"> {{fsc_percent}} </span>  </li> {% endif %}
+             {% if fsc_dollar != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> FSC per mile: <span class="badge badge-primary badge-pill"> {{fsc_dollar}} </span>  </li> {% endif %}
+             {% if rpm != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> Rate per mile: <span class="badge badge-primary badge-pill"> {{rpm}} </span>  </li> {% endif %}
+             {% if miles != 0 %} <li class="list-group-item d-flex justify-content-between align-items-center"> Miles Travelled: <span class="badge badge-primary badge-pill"> {{miles}} </span>  </li> {% endif %}
         </ul>
         
 
