@@ -12,12 +12,15 @@ django-summernote==0.8.11.4
 django-taggit==1.1.0
 djangorestframework==3.10.2
 docutils==0.14
+et-xmlfile==1.0.1
 future==0.16.0
 gunicorn==19.9.0
 idna==2.7
+jdcal==1.4.1
 jmespath==0.9.4
 joblib==0.14.0
 numpy==1.17.4
+openpyxl==3.0.2
 pandas==0.25.3
 pathspec==0.5.9
 Pillow==6.1.0
