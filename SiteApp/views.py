@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import QuoteRequest, DriverResume, Employee, Customer, FuelData, FuelSurcharge
-from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm, FuelDataForm
+from .models import QuoteRequest, DriverResume, Employee, Customer, FuelData, FuelSurcharge, Department, Invoice , ScheduleData, Schedule
+from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm, FuelDataForm , ScheduleForm
 from django.contrib.auth import logout
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
+import openpyxl
 
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -13,6 +14,11 @@ from sklearn.model_selection import train_test_split
 
 import urllib3
 import re
+
+import csv
+
+# front end views
+# -------------------------------
 
 
 def index(request):
@@ -40,25 +46,6 @@ def viewContact(request):
         return render(request, 'SiteApp/contact_us.html', {'form': form})
 
 
-def UserLogout(request):
-    logout(request)
-    return redirect('/')
-
-@login_required
-def UserDashBoard(request):
-    return render(request, 'SiteApp/dashboard.html')
-
-@login_required
-def ViewQuoteRequests(request):
-    quote_requests = QuoteRequest.objects.all()
-    return render(request, 'SiteApp/list_quote_requests.html', {'quote_requests': quote_requests})
-
-@login_required
-def ViewDriverResumes(request):
-    resumes = DriverResume.objects.all()
-    return render(request, 'SiteApp/list_driver_resumes.html', {'resumes': resumes})
-
-
 def DriveWithUs(request):
     if request.method == "POST":
         form = DriverResumeForm(request.POST)
@@ -84,15 +71,42 @@ def RequestQuote(request):
         form = QuoteRequestForm()
         return render(request, 'SiteApp/quote_request.html', {'form': form})
 
+
+# log user out
+def UserLogout(request):
+    logout(request)
+    return redirect('/')
+
+# Backend views
+# -------------------------------------------------
+@login_required
+def UserDashBoard(request):
+    return render(request, 'SiteApp/dashboard.html')
+
+
+@login_required
+def ViewQuoteRequests(request):
+    quote_requests = QuoteRequest.objects.all()
+    return render(request, 'SiteApp/list_quote_requests.html', {'quote_requests': quote_requests})
+
+
 @login_required
 def ViewQuote(request, id):
     quote = QuoteRequest.objects.get(id=id)
     return render(request, 'SiteApp/view_quote.html', {'quote': quote})
 
+
+@login_required
+def ViewDriverResumes(request):
+    resumes = DriverResume.objects.all()
+    return render(request, 'SiteApp/list_driver_resumes.html', {'resumes': resumes})
+
+
 @login_required
 def ViewResume(request, id):
     resume = DriverResume.objects.get(id=id)
     return render(request, 'SiteApp/view_resume.html', {'resume': resume})
+
 
 @login_required
 def FuelSurcharge(request):
@@ -135,10 +149,69 @@ def FuelSurcharge(request):
 
     return render(request, 'SiteApp/fuel_surcharge.html', context_dictionary)
 
+
+@login_required
+def ListDepartments(request):
+    departments = Department.objects.all()
+    return render(request, 'SiteApp/list_departments.html', {'departments': departments})
+
+@login_required
+def AddDepartment(request):
+    pass
+
+
+@login_required
+def ViewDepartment(request, id):
+    department = Department.objects.ger(id=id)
+    return render(request, 'SiteApp/view_department.html', {'department': department})
+
+
+@login_required
+def EditDepartment(request, id):
+    pass
+
+
+@login_required
+def DeleteDepartment(request, id):
+    pass
+
+
+@login_required
+def ListInvoices(request):
+    invoices = Invoice.objects.all()
+    return render(request, 'SiteApp/list_invoices.html', {'invoices': invoices})
+
+
+@login_required
+def AddInvoice(request):
+    pass
+
+
+@login_required
+def ViewInvoice(request, id):
+    invoice = Invoice.objects.get()
+    return render(request, 'SiteApp/view_invoice.html', {'invoice': invoice})
+
+
+@login_required
+def DeleteInvoice(request, id):
+    pass
+
+
+@login_required
+def EditInvoice(request, id):
+    pass
+
+
 @login_required
 def ListEmployees(request):
     employees = Employee.objects.all()
     return render(request, 'SiteApp/list_employees.html', {'employees': employees})
+
+@login_required
+def ViewEmployee(request,id):
+    employee = Employee.objects.get(employee_id=id)
+    return render(request,'SiteApp/view_employee.html',{'employee':employee})
 
 @login_required
 def AddEmployee(request):
@@ -153,18 +226,27 @@ def AddEmployee(request):
         form = EmployeeForm()
         return render(request, 'SiteApp/add_employee.html', {'form': form})
 
+
 @login_required
 def EditEmployee(request, id):
     pass
+
 
 @login_required
 def DeleteEmployee(request, id):
     pass
 
+
 @login_required
 def ListCustomers(request):
     customers = Customer.objects.all()
     return render(request, 'SiteApp/list_customers.html', {'customers': customers})
+
+@login_required
+def ViewCustomer(request,id):
+    customer = Customer.objects.get(id=id)
+    return render(request,'SiteApp/view_customer.html',{'customer':customer})
+
 
 @login_required
 def AddCustomer(request):
@@ -179,13 +261,16 @@ def AddCustomer(request):
         form = CustomerForm()
         return render(request, 'SiteApp/add_customer.html', {'form': form})
 
+
 @login_required
 def EditCustomer(request, id):
     pass
 
+
 @login_required
 def DeleteCustomer(request, id):
     pass
+
 
 @login_required
 def FuelData(request):
@@ -196,7 +281,7 @@ def FuelData(request):
             # calculate values
             context_dict = get_fuel_values(cd)
             flag = True
-            context_dict.update({'flag':flag, 'form':form})
+            context_dict.update({'flag': flag, 'form': form})
 
         else:
             return HttpResponse("Invalid form submission.")
@@ -205,6 +290,66 @@ def FuelData(request):
         context_dict = {'form': form}
 
     return render(request, 'SiteApp/fuel_data.html', context_dict)
+
+@login_required
+def ListSchedules(request):
+    schedules = Schedule.objects.all()
+    return render(request,'SiteApp/list_schedules.html',{'schedules':schedules})
+
+@login_required
+def ViewSchedule(request,id):
+    schedule = Schedule.objects.get(id = id)
+    schedule_data = ScheduleData.objects.filter(schedule = schedule)
+    return render(request, 'SiteApp/view_schedule.html',{'schedule':schedule, 'schedule_data':schedule_data})
+
+@login_required
+def DeleteSchedule(request,id):
+    schedule = Schedule.objects.get(id = id)
+    schedule.delete()
+    return redirect('list_schedules') 
+
+@login_required
+def EditSchedule(request,id):
+    pass
+
+@login_required
+def AddSchedule(request):
+    error = ""
+    if request.method == "POST":
+        form = ScheduleForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            csv_file = request.FILES["csv_file"]
+            if not csv_file.name.endswith('.csv'):
+                error = 'File is not CSV type'
+                return render(request,'SiteApp/add_schedule.html',{'form':form,'error':error})
+            
+            #check if schedule name already exists
+            schedules = Schedule.objects.all()
+            names = []
+            for item in schedules:
+                names.append(item.name)
+
+            data_saved = False
+            if name in names:
+                error = "A schedule with that name already exists"
+            else:
+                data_saved = StoreScheduleData(name,csv_file)
+            
+            if data_saved:
+                return redirect('list_schedules')
+
+            
+        else:
+            error = "Invalid form submission. Schedule not saved."
+    else:
+        form = ScheduleForm()
+    
+    return render(request, 'SiteApp/add_schedule.html', {'form':form,'error':error})
+
+# Extra helper functions
+# -----------------------------------------------------
+
 
 # takes current fuel price in us gallons and a column number to return TL and LTL surcharge rates
 # based on L2011 schedule of Larway
@@ -283,7 +428,7 @@ def get_fuel_values(cd):
 
     if fsc_percent == 0:
         fsc_percent = 0.0
-    
+
     if fsc_dollar == 0:
         fsc_dollar = 0.0
 
@@ -298,11 +443,11 @@ def get_fuel_values(cd):
 
     if fsc_amt == 0:
         fsc_amt = 0.0
-    
+
     if total == 0:
         total = 0.0
 
-    if line_haul == 0 :
+    if line_haul == 0:
         if rpm != 0 and miles != 0:
             line_haul = rpm * miles
         if total != 0 and fsc_amt != 0:
@@ -315,15 +460,15 @@ def get_fuel_values(cd):
     elif fsc_percent != 0:
         fsc_amt = line_haul * (fsc_percent/100)
 
-    if total == 0 :
+    if total == 0:
         if fsc_amt != 0 and line_haul != 0:
             total = fsc_amt + line_haul
 
-    if fsc_percent == 0 :
+    if fsc_percent == 0:
         if fsc_amt != 0 and line_haul != 0:
             fsc_percent = (fsc_amt/line_haul)
 
-    if fsc_dollar == 0 :
+    if fsc_dollar == 0:
         if fsc_amt != 0 and miles != 0:
             fsc_dollar = fsc_amt / miles
 
@@ -331,25 +476,47 @@ def get_fuel_values(cd):
         if fsc_amt != 0 and total != 0:
             fsc_percent = (fsc_amt / (total-fsc_amt)) * 100
 
-    if line_haul == 0 :
+    if line_haul == 0:
         if total != 0 and fsc_amt != 0:
             line_haul = total - fsc_amt
 
-    if rpm == 0 :
+    if rpm == 0:
         if line_haul != 0 and miles != 0:
             rpm = line_haul / miles
 
-    if miles == 0 :
+    if miles == 0:
         if line_haul != 0 and rpm != 0:
             miles = line_haul / rpm
 
-    context_dict = {'fsc_amt': round(fsc_amt,3),
-                    'line_haul': round(line_haul,3),
-                    'fsc_percent': round(fsc_percent,3),
-                    'fsc_dollar': round(fsc_dollar,3),
-                    'total': round(total,3),
-                    'miles': round(miles,3),
-                    'rpm': round(rpm,3),
+    if total != 0 and fsc_percent !=0:
+        fsc_amt = (total * (fsc_percent /100))/ (1+(fsc_percent/100))
+        line_haul = total - fsc_amt
+
+    context_dict = {'fsc_amt': round(fsc_amt, 3),
+                    'line_haul': round(line_haul, 3),
+                    'fsc_percent': round(fsc_percent, 3),
+                    'fsc_dollar': round(fsc_dollar, 3),
+                    'total': round(total, 3),
+                    'miles': round(miles, 3),
+                    'rpm': round(rpm, 3),
                     }
 
     return context_dict
+
+
+def StoreScheduleData(name,csv_file):
+    new_schedule = Schedule.objects.create(name=name)
+    new_schedule.save()
+    schedule = Schedule.objects.get(name=name)
+
+    data = csv_file.read().decode('utf-8')
+    lines = data.split("\n")
+    lines = lines[:-1]
+
+    for line in lines[1:]:
+        fields = line.split(",")
+        schedule_data = ScheduleData(
+            schedule=schedule, fuel_price=fields[1], tl_surcharge_percent=fields[2], ltl_surcharge_percent=fields[3])
+        schedule_data.save()
+    
+    return True

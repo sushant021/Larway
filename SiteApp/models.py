@@ -79,8 +79,54 @@ class DriverResume(models.Model):
         return reverse('view_resume', args=[self.id])
 
 
+class Invoice(models.Model):
+    invoice_number = models.CharField(max_length=20)
+    invoice_date = models.DateField()
+    invoice_code = models.CharField(max_length=20)
+    order_number = models.CharField(max_length=20)
+    shipped_date = models.DateField()
+    received_date = models.DateField()
+    del_number = models.CharField(max_length=50)
+    shipper = models.CharField(max_length=100)
+    consignee = models.CharField(max_length=100)
+    frieght_description = models.CharField(max_length=100)
+    frieght_weight = models.CharField(max_length=20)
+    frieght_quantity = models.CharField(max_length=20)
+    comments = models.TextField()
+    frieght_rate = models.IntegerField()
+    miles_travelled = models.IntegerField()
+    fsc_per_mile = models.FloatField()
+    fsc_percent = models.FloatField()
+    fsc_amount = models.IntegerField()
+    sub_total = models.IntegerField()
+    total = models.IntegerField()
+
+    def __str__(self):
+        return self.invoice_number
+
+    def get_absolute_url(self):
+        return reverse("view_invoice", args=[self.invoice_number])
+
+
+class Schedule(models.Model):
+    name = models.CharField(max_length=50)
+    csv_file = models.FileField(upload_to='uploads/schedules/', null="True")
+
+    def get_absolute_url(self):
+        return reverse('view_schedule', args=[self.id])
+
+
+class ScheduleData(models.Model):
+    schedule = models.ForeignKey(
+        Schedule, on_delete=models.CASCADE, related_name="schedule_data")
+    fuel_price = models.FloatField()
+    tl_surcharge_percent = models.FloatField()
+    ltl_surcharge_percent = models.FloatField()
+
+
 class FuelSurcharge(models.Model):
     input_diesel_price = models.FloatField()
+    #schedule = models.ForeignKey(Schedule)
 
 
 class FuelData(models.Model):

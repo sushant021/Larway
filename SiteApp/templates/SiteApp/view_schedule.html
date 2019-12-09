@@ -1,0 +1,23 @@
+{% extends "backend_base.html" %} {% block content %}
+
+<div class="container py-4">
+  <h5>Fuel Surcharge Schedule: {{schedule.name}}</h5>
+
+  <section>
+    <table class="table">
+      <tr>
+        <th>Fuel Price</th>
+        <th>TL Surcharge</th>
+        <th>LTL Surcharge</th>
+      </tr>
+      {% for data in schedule_data %}
+      <tr>
+        <td>$ {{data.fuel_price}}</td>
+        <td>{{data.tl_surcharge_percent}} %</td>
+        <td>{{data.ltl_surcharge_percent}} %</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+</div>
+{% endblock %}

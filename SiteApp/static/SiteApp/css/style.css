@@ -288,7 +288,7 @@ nav a:hover {
 
 /* login form */
 .login-section {
-  width: 50% !important;
+  width: 40% !important;
   margin-right: auto;
   margin-left: auto;
   padding: 3em;
@@ -492,5 +492,8 @@ nav a:hover {
   .backend-content {
     position: relative !important;
     right: unset;
+  }
+  .login-section {
+    width: 100% !important;
   }
 }

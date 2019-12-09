@@ -4,14 +4,35 @@
     {% include 'SiteApp/nav.html' %}
     <div class="text-center">
       <div class="caption">
+        <div>
+          <img
+            src="{% static 'SiteApp/img/us_flag.jpg' %}"
+            alt="U.S."
+            width="100px"
+            class="mr-3"
+          />
+          <img
+            src="{% static 'SiteApp/img/canada_flag.png'%}"
+            alt="Canada"
+            width="100px"
+            height="60px"
+          />
+        </div>
+        {% comment %}
         <p class="date mb-0">Since 1985</p>
+        {% endcomment %}
         <p>
           <span class="title">Cross Border Carrier</span> <br />
           <span class="subtitle">and Logistic Solutions</span>
         </p>
         <p class="pt-4">
-          <a href="{% url 'drive_with_us' %}" class="action-btn action-btn-1 mx-3">Drive With Us</a
-          ><a href="{% url 'request_quote' %}" class="action-btn action-btn-2">Request A Quote</a>
+          <a
+            href="{% url 'view_contact' %}"
+            class="action-btn action-btn-1 mx-3"
+            >Contact Us</a
+          ><a href="{% url 'request_quote' %}" class="action-btn action-btn-2"
+            >Request A Quote</a
+          >
         </p>
       </div>
     </div>
@@ -95,15 +116,18 @@
           <span id="aboutCaptionSubtitle">With International Experience.</span>
         </p>
         <p>
-         Larway Transportation began operations in 1985 in a shared office suite in Oakridges, 
-         Ontario with little more than a hard-line telephone, a Rolodex, and their word to focus
-        on people and their promise and not just cargo.
+          Larway Transportation began operations in 1985 in a shared office
+          suite in Oakridges, Ontario with little more than a hard-line
+          telephone, a Rolodex, and their word to focus on people and their
+          promise and not just cargo.
         </p>
         <p>
-          Within the first year of operation, Larway crossed their million-dollar promise and continued 
-          to grow. Since then, the company has adapted to meet the needs of their customers and their drivers,
-          leading the way in safety and reliability. In a constantly changing and developing industry, one of 
-          Larway’s most important qualities continues to be their word – and that will never change. 
+          Within the first year of operation, Larway crossed their
+          million-dollar promise and continued to grow. Since then, the company
+          has adapted to meet the needs of their customers and their drivers,
+          leading the way in safety and reliability. In a constantly changing
+          and developing industry, one of Larway’s most important qualities
+          continues to be their word – and that will never change.
         </p>
         <p class="mt-4 ">
           <a href="#" class="larway-btn" style="display:inline-block;">
