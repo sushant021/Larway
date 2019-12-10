@@ -34,15 +34,13 @@
 
       <td class="text-center">
         {% comment %}
-        <a
-          href="{% url 'edit_invoice' id=invoice.invoice_number %}"
-          class="btn btn-primary"
+        <a href="{% url 'edit_invoice' id=invoice.id %}" class="btn btn-primary"
           ><span><i class="fas fa-edit"></i></span
         ></a>
         {% endcomment %}
 
         <a
-          href="{% url 'delete_invoice' id=invoice.invoice_number %}"
+          href="{% url 'delete_invoice' id=invoice.id %}"
           class="btn btn-danger"
           ><span><i class="far fa-trash-alt"></i></span
         ></a>

@@ -1,0 +1,12 @@
+{% extends "backend_base.html" %} {% load crispy_forms_tags %}
+{% block content%}
+<div class="container py-3">
+  <h4>Edit Invoice: #{{invoice.invoice_number}}</h4>
+  <hr />
+  <form action="{% url 'edit_invoice' id=invoice.id %}" method="post">
+    {{ form | crispy }} {% csrf_token %}
+    <input type="submit" name="Save" class="larway-btn" />
+  </form>
+</div>
+
+{% endblock %}

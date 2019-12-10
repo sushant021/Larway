@@ -48,18 +48,17 @@ urlpatterns = [
     path('customers/add/', views.AddCustomer, name='add_customer'),
     path('customers/', views.ListCustomers, name='list_customers'),
     path('customers/<int:id>/', views.ViewCustomer, name='view_customer'),
-    path('customers/delete/<int:id>',
+    path('customers/delete/<int:id>/',
          views.DeleteCustomer, name='delete_customer'),
-    path('customers/edit/<int:id>', views.EditCustomer, name='edit_customer'),
+    path('customers/edit/<int:id>/', views.EditCustomer, name='edit_customer'),
 
     # invoice CRUD
     path('invoices/', views.ListInvoices, name="list_invoices"),
-    path('invoices/details/<str:id>/', views.ViewInvoice, name="view_invoice"),
+    path('invoices/<int:id>/', views.ViewInvoice, name="view_invoice"),
     path('invoices/add/', views.AddInvoice, name="add_invoice"),
-    path('invoices/edit/<str:id>/',
-         views.EditInvoice, name="edit_invoice"),
-    path('invoices/delete/<str:id>/',
+    path('invoices/delete/<int:id>/',
          views.DeleteInvoice, name="delete_invoice"),
+    path('invoices/edit/<int:id>/', views.EditInvoice, name='edit_invoice'),
 
     # schedules CRUD
     path('schedules/add/', views.AddSchedule, name="add_schedule"),

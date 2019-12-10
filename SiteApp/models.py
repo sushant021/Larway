@@ -45,8 +45,7 @@ class Customer(models.Model):
         return self.company_name
 
     def get_absolute_url(self):
-        pass
-        return reverse('view_customer', args=[self.customer_id])
+        return reverse('view_customer', args=[self.id])
 
 
 class QuoteRequest(models.Model):
@@ -107,12 +106,15 @@ class Invoice(models.Model):
         return self.invoice_number
 
     def get_absolute_url(self):
-        return reverse("view_invoice", args=[self.invoice_number])
+        return reverse('view_invoice', args=[self.id])
 
 
 class Schedule(models.Model):
     name = models.CharField(max_length=50)
     csv_file = models.FileField(upload_to='uploads/schedules/', null="True")
+
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         return reverse('view_schedule', args=[self.id])
@@ -128,7 +130,7 @@ class ScheduleData(models.Model):
 
 class FuelSurcharge(models.Model):
     input_diesel_price = models.FloatField()
-    #schedule = models.ForeignKey(Schedule)
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE, default=1)
 
 
 class FuelData(models.Model):

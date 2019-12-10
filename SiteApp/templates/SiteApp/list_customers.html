@@ -24,21 +24,19 @@
       {% for customer in customers %}
       <tr>
         <td><span>{{customer.customer_id}}</span></td>
-        <td><span>{{customer.company_name}}</span></td>
+        <td> <a href="{{customer.get_absolute_url }}"> <span>{{customer.company_name}}</span></a></td>
         <td>
-          <a href="{{customer.get_absolute_url }}"
-            >{{customer.key_person_name}}
-          </a>
+          {{customer.key_person_name}}
         </td>
         <td><span>{{customer.key_person_contact}}</span></td>
         <td><span>{{customer.email}}</span></td>
 
         <td>
-          <a href="{% url 'edit_customer' id=customer.customer_id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
+          <a href="{% url 'edit_customer' id=customer.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
         
         </td>
         <td>
-          <a href="{% url 'delete_customer' id=customer.customer_id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
+          <a href="{% url 'delete_customer' id=customer.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
         </td>
       </tr>
       {% endfor %}

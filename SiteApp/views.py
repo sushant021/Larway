@@ -118,6 +118,7 @@ def FuelSurcharge(request):
     last_date = data[2]
 
     # get_surcharge_rates takes current fuel price and a column number(2 for TL and 3 for LTL) as parameters
+    
     tl_surcharge = get_surcharge_rate(us_price, 2)
     ltl_surcharge = get_surcharge_rate(us_price, 3)
 
@@ -130,7 +131,9 @@ def FuelSurcharge(request):
         form = FuelSurchargeForm(request.POST)
         if form.is_valid():
             input_price = form.cleaned_data['input_diesel_price']
+            schedule = form.cleaned_data['schedule']
             form_tl_surcharge = get_surcharge_rate(input_price, 2)
+            # return HttpResponse(form_tl_surcharge)
             form_ltl_surcharge = get_surcharge_rate(input_price, 3)
         else:
             return HttpResponse("Invalid Form Request.")
@@ -220,32 +223,27 @@ def AddInvoice(request):
 
 @login_required
 def ViewInvoice(request, id):
-    invoice = Invoice.objects.get(invoice_number = id)
+    invoice = Invoice.objects.get(id = id)
     return render(request, 'SiteApp/view_invoice.html', {'invoice': invoice})
 
 
 @login_required
 def DeleteInvoice(request, id):
-    invoice = Invoice.objects.get(invoice_number=id)
+    invoice = Invoice.objects.get(id=id)
     invoice.delete()
     return redirect('list_invoices')
 
 
 @login_required
 def EditInvoice(request, id):
-    if request.method == "POST":
-        form = InvoiceForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list_invoices')
-        else:
-            error = "Invalid form submission"
-            return render(request, 'SiteApp/edit_invoice.html', {'form': form, 'error': error})
-    else:
-        invoice = Invoice.objects.get(invoice_number=id)
-        form = InvoiceForm(instance=invoice)
-        return render(request, 'SiteApp/edit_invoice.html', {'form': form})
-
+    template = 'SiteApp/edit_invoice.html'
+    invoice = Invoice.objects.get(id=id)
+    form = InvoiceForm(request.POST or None, instance=invoice)
+    if form.is_valid():
+        form.save()
+        return redirect('list_invoices')
+    context = {"form": form, 'invoice': invoice}
+    return render(request, template, context)
 
 @login_required
 def ListEmployees(request):
@@ -316,7 +314,7 @@ def AddCustomer(request):
 @login_required
 def EditCustomer(request, id):
     template = 'SiteApp/edit_customer.html'
-    customer = Customer.objects.get(customer_id=id)
+    customer = Customer.objects.get(id=id)
     form = CustomerForm(request.POST or None, instance=customer)
     if form.is_valid():
         form.save()
@@ -327,7 +325,7 @@ def EditCustomer(request, id):
 
 @login_required
 def DeleteCustomer(request, id):
-    customer = Customer.objects.get(customer_id=id)
+    customer = Customer.objects.get(id=id)
     customer.delete()
     return redirect('list_customers')
 
@@ -425,10 +423,20 @@ def AddSchedule(request):
 
 def get_surcharge_rate(fuel_price, col_num):
     try:
+    # schedule_data = ScheduleData.objects.filter(schedule=schedule)
+    # my_list = []
+    # for data in schedule_data:
+    #     fuel_price = data.fuel_price
+    #     tl_surcharge = data.tl_surcharge_percent
+    #     ltl_surcharge = data.ltl_surcharge_percent
+    #     my_list.append([fuel_price,tl_surcharge,ltl_surcharge])
+
+    #create a data frame from the list 
+    # df = pd.DataFrame(my_list, columns=['Fuel Price', 'TL Surcharge','LTL Surcharge'])
         p = staticfiles_storage.path('data/surcharge_table.csv')
         df = pd.read_csv(p)
     except:
-        return False
+          return False
 
     # get the data
     if col_num == 2:
