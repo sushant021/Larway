@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import QuoteRequest, DriverResume, Employee, Customer, FuelData, FuelSurcharge, Department, Invoice , ScheduleData, Schedule
-from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, CustomerForm, FuelSurchargeForm, FuelDataForm , ScheduleForm
+from .forms import DriverResumeForm, QuoteRequestForm, EmployeeForm, InvoiceForm, CustomerForm, FuelSurchargeForm, FuelDataForm , ScheduleForm,DepartmentForm
 from django.contrib.auth import logout
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
@@ -157,23 +157,43 @@ def ListDepartments(request):
 
 @login_required
 def AddDepartment(request):
-    pass
+    if request.method == "POST":
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_departments')
+        else:
+            error = "Invalid form submission"
+            return render(request,'SiteApp/add_department.html',{'form':form,'error':error})
+    else:
+        form = DepartmentForm()
+        return render(request, 'SiteApp/add_department.html', {'form': form})
 
 
 @login_required
 def ViewDepartment(request, id):
-    department = Department.objects.ger(id=id)
-    return render(request, 'SiteApp/view_department.html', {'department': department})
+    department = Department.objects.get(id=id)
+    employees = Employee.objects.filter(department= department)
+    num_employees = len(employees)
+    return render(request, 'SiteApp/view_department.html', {'department': department,'employees':employees,'num_employees':num_employees})
 
 
 @login_required
 def EditDepartment(request, id):
-    pass
-
+    template = 'SiteApp/edit_department.html'
+    department = Department.objects.get(id=id)
+    form = DepartmentForm(request.POST or None, instance=department)
+    if form.is_valid():
+        form.save()
+        return redirect('list_departments')
+    context = {"form": form,'department':department}
+    return render(request, template, context)
 
 @login_required
 def DeleteDepartment(request, id):
-    pass
+    department = Department.objects.get(id=id)
+    department.delete()
+    return redirect('list_departments')
 
 
 @login_required
@@ -184,23 +204,47 @@ def ListInvoices(request):
 
 @login_required
 def AddInvoice(request):
-    pass
+    if request.method == "POST":
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_invoices')
+        else:
+            error = "Invalid form submission"
+            return render(request, 'SiteApp/add_invoice.html', {'form': form, 'error': error})
+    else:
+        form = InvoiceForm()
+        return render(request, 'SiteApp/add_invoice.html', {'form': form})
+
 
 
 @login_required
 def ViewInvoice(request, id):
-    invoice = Invoice.objects.get()
+    invoice = Invoice.objects.get(invoice_number = id)
     return render(request, 'SiteApp/view_invoice.html', {'invoice': invoice})
 
 
 @login_required
 def DeleteInvoice(request, id):
-    pass
+    invoice = Invoice.objects.get(invoice_number=id)
+    invoice.delete()
+    return redirect('list_invoices')
 
 
 @login_required
 def EditInvoice(request, id):
-    pass
+    if request.method == "POST":
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_invoices')
+        else:
+            error = "Invalid form submission"
+            return render(request, 'SiteApp/edit_invoice.html', {'form': form, 'error': error})
+    else:
+        invoice = Invoice.objects.get(invoice_number=id)
+        form = InvoiceForm(instance=invoice)
+        return render(request, 'SiteApp/edit_invoice.html', {'form': form})
 
 
 @login_required
@@ -219,7 +263,7 @@ def AddEmployee(request):
         form = EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('list_employees')
         else:
             return HttpResponse('Invalid Form')
     else:
@@ -229,7 +273,14 @@ def AddEmployee(request):
 
 @login_required
 def EditEmployee(request, id):
-    pass
+    template = 'SiteApp/edit_employee.html'
+    employee = Employee.objects.get(employee_id=id)
+    form = EmployeeForm(request.POST or None, instance=employee)
+    if form.is_valid():
+        form.save()
+        return redirect('list_employees')
+    context = {"form": form, 'employee': employee}
+    return render(request, template, context)
 
 
 @login_required
@@ -254,7 +305,7 @@ def AddCustomer(request):
         form = CustomerForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('list_customer')
         else:
             return HttpResponse('Invalid Form')
     else:
@@ -264,12 +315,21 @@ def AddCustomer(request):
 
 @login_required
 def EditCustomer(request, id):
-    pass
+    template = 'SiteApp/edit_customer.html'
+    customer = Customer.objects.get(customer_id=id)
+    form = CustomerForm(request.POST or None, instance=customer)
+    if form.is_valid():
+        form.save()
+        return redirect('list_customers')
+    context = {"form": form, 'customer': customer}
+    return render(request, template, context)
 
 
 @login_required
 def DeleteCustomer(request, id):
-    pass
+    customer = Customer.objects.get(customer_id=id)
+    customer.delete()
+    return redirect('list_customers')
 
 
 @login_required
@@ -310,7 +370,14 @@ def DeleteSchedule(request,id):
 
 @login_required
 def EditSchedule(request,id):
-    pass
+    template = 'SiteApp/edit_schedule.html'
+    schedule = Schedule.objects.get(id=id)
+    form = ScheduleForm(request.POST or None, instance=schedule)
+    if form.is_valid():
+        form.save()
+        return redirect('list_schedules')
+    context = {"form": form, 'schedule': schedule}
+    return render(request, template, context)
 
 @login_required
 def AddSchedule(request):
@@ -426,26 +493,26 @@ def get_fuel_values(cd):
     fsc_amt = cd['surcharge_amount']
     total = cd['total_amount']
 
-    if fsc_percent == 0:
-        fsc_percent = 0.0
+    # if fsc_percent == 0:
+    #     fsc_percent = 0.0
 
-    if fsc_dollar == 0:
-        fsc_dollar = 0.0
+    # if fsc_dollar == 0:
+    #     fsc_dollar = 0.0
 
-    if miles == 0:
-        miles = 0.0
+    # if miles == 0:
+    #     miles = 0.0
 
-    if rpm == 0:
-        rpm = 0.0
+    # if rpm == 0:
+    #     rpm = 0.0
 
-    if line_haul == 0:
-        line_haul = 0.0
+    # if line_haul == 0:
+    #     line_haul = 0.0
 
-    if fsc_amt == 0:
-        fsc_amt = 0.0
+    # if fsc_amt == 0:
+    #     fsc_amt = 0.0
 
-    if total == 0:
-        total = 0.0
+    # if total == 0:
+    #     total = 0.0
 
     if line_haul == 0:
         if rpm != 0 and miles != 0:

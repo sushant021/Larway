@@ -5,7 +5,7 @@
   <hr />
   <form action="{% url 'add_employee' %}" method="post">
     {{ form | crispy }} {% csrf_token %}
-    <input type="submit" name="Submit Application" class="btn btn-primary" />
+    <input type="submit" name="Save" class="larway-btn" />
   </form>
 </div>
 

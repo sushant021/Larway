@@ -1,0 +1,43 @@
+{% extends 'backend_base.html' %} {% block content %}
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-sm-6">
+      <h4>Departments</h4>
+    </div>
+    <div class="col-sm-6">
+      <a href="{% url 'add_department' %}" class="btn btn-primary float-right"
+        >Add Department</a
+      >
+    </div>
+  </div>
+  <div class="article mt-4">
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        
+        <th></th>
+        <th></th>
+      </tr>
+      {% for department in departments %}
+      <tr>
+        <td><span>{{department.id}}</span></td>
+        <td>
+          <a href="{{department.get_absolute_url }}"
+            >{{department.name}}</a
+          >
+        </td>
+        
+        <td>
+          <a href="{% url 'edit_department' id=department.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
+        
+        </td>
+        <td>
+          <a href="{% url 'delete_department' id=department.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

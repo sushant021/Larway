@@ -41,25 +41,24 @@ urlpatterns = [
     path('employees/', views.ListEmployees, name='list_employees'),
     path('employees/<int:id>/', views.ViewEmployee, name='view_employee'),
     path('employees/delete/<int:id>',
-         views.DeleteEmployee, name='delete_employees'),
-    path('employees/edit/<int:id>', views.EditEmployee, name='edit_employees'),
+         views.DeleteEmployee, name='delete_employee'),
+    path('employees/edit/<int:id>', views.EditEmployee, name='edit_employee'),
 
     # customer CRUD
     path('customers/add/', views.AddCustomer, name='add_customer'),
     path('customers/', views.ListCustomers, name='list_customers'),
     path('customers/<int:id>/', views.ViewCustomer, name='view_customer'),
     path('customers/delete/<int:id>',
-         views.DeleteCustomer, name='delete_customers'),
-    path('customers/edit/<int:id>', views.EditCustomer, name='edit_customers'),
+         views.DeleteCustomer, name='delete_customer'),
+    path('customers/edit/<int:id>', views.EditCustomer, name='edit_customer'),
 
     # invoice CRUD
     path('invoices/', views.ListInvoices, name="list_invoices"),
-    path('invoices/<str:invoice_num>/',
-         views.ViewInvoice, name="view_invoice"),
+    path('invoices/details/<str:id>/', views.ViewInvoice, name="view_invoice"),
     path('invoices/add/', views.AddInvoice, name="add_invoice"),
-    path('invoices/edit/<str:invoice_num>/',
+    path('invoices/edit/<str:id>/',
          views.EditInvoice, name="edit_invoice"),
-    path('invoices/delete/<str:invoice_num>/',
+    path('invoices/delete/<str:id>/',
          views.DeleteInvoice, name="delete_invoice"),
 
     # schedules CRUD

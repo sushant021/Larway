@@ -1,0 +1,44 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container py-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <p class="lead">
+        Employee : {{employee.first_name}} {{employee.last_name}}
+
+      </p>
+      <hr>
+    <p >    
+        Employee Id : {{employee.employee_id}} 
+    </p>
+      <p>
+        Department : {{employee.department}}
+      </p>
+        <p>
+            Designation : {{employee.designation}}
+        </p>
+        <p>
+        Email : {{employee.email}}
+        </p>
+        <p>
+            Cell Number : {{employee.cell_number}}
+        </p>
+        <p>
+            Address : {{employee.address}}
+        </p>
+        
+        <p>
+            Salary : {{employee.salary}}
+        </p>
+        <p>
+            Date Of Join : {{employee.date_of_join}}
+        </p>
+        
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <a href="{% url 'edit_employee' id=employee.employee_id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
+        <a href="{% url 'delete_employee' id=employee.employee_id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -24,11 +24,11 @@
       <td><a href="{{schedule.get_absolute_url }}">{{schedule.name}}</a></td>
 
       <td class="text-center">
-        <a
+        {% comment %} <a
           href="{% url 'edit_schedule' id=schedule.id %}"
           class="btn btn-primary"
           ><span><i class="fas fa-edit"></i></span
-        ></a>
+        ></a> {% endcomment %}
 
         <a
           href="{% url 'delete_schedule' id=schedule.id %}"

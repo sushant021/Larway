@@ -1,0 +1,86 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container py-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <h4>Invoice # {{invoice.invoice_number}}</h4>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <a href="{% url 'edit_invoice' id=invoice.invoice_number %}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
+        <a href="{% url 'delete_invoice' id=invoice.invoice_number %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+          <p> <strong > Invoide Date: </strong>{{invoice.invoice_date}}</p>
+      </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong > Account Code: </strong>{{invoice.account_code}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong > Order Number: </strong>{{invoice.order_number}}</p>
+        </div>
+  </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong > Shipped Date: </strong>{{invoice.shipped_date}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong > Received Date: </strong>{{invoice.received_date}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong > Del Number: </strong>{{invoice.del_number}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
+            <p> <strong > Shipper: </strong>{{invoice.shipper}}</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
+            <p> <strong > Consignee: </strong>{{invoice.consignee}}</p>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
+            <p> <strong > Frieght Description: </strong>{{invoice.frieght_description}}</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
+            <p> <strong > Frieght Weight: </strong>{{invoice.frieght_weight}}</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
+            <p> <strong > Frieght Quantity: </strong>{{invoice.frieght_quantity}}</p>
+        </div>
+    
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p><strong>Comments: </strong>{{invoice.comments}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> FSC Per Mile: </strong>{{invoice.fsc_per_mile}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> FSC Percent: </strong>{{invoice.fsc_percent}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> FSC Amount</strong>{{invoice.fsc_amount}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> Frieght Rate: </strong>{{invoice.frieght_rate}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> Sub Total </strong>{{invoice.sub_total}}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-lg-4">
+            <p> <strong> Total </strong>{{invoice.total}}</p>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

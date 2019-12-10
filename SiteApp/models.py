@@ -9,6 +9,9 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('view_department', args=[self.id])
+
 
 class Employee(models.Model):
     employee_id = models.IntegerField()
@@ -27,8 +30,7 @@ class Employee(models.Model):
         return self.first_name
 
     def get_absolute_url(self):
-        pass
-        # return reverse('views.viewEmployee',args=[self.employee_id])
+        return reverse('view_employee', args=[self.employee_id])
 
 
 class Customer(models.Model):
@@ -44,7 +46,7 @@ class Customer(models.Model):
 
     def get_absolute_url(self):
         pass
-        # return reverse('views.viewEmployee',args=[self.employee_id])
+        return reverse('view_customer', args=[self.customer_id])
 
 
 class QuoteRequest(models.Model):
@@ -81,25 +83,25 @@ class DriverResume(models.Model):
 
 class Invoice(models.Model):
     invoice_number = models.CharField(max_length=20)
-    invoice_date = models.DateField()
-    invoice_code = models.CharField(max_length=20)
+    invoice_date = models.DateField(null=True, blank=True)
+    account_code = models.CharField(max_length=20)
     order_number = models.CharField(max_length=20)
-    shipped_date = models.DateField()
-    received_date = models.DateField()
-    del_number = models.CharField(max_length=50)
+    shipped_date = models.DateField(null=True, blank=True)
+    received_date = models.DateField(null=True, blank=True)
+    del_number = models.CharField(max_length=50, null=True, blank=True)
     shipper = models.CharField(max_length=100)
-    consignee = models.CharField(max_length=100)
-    frieght_description = models.CharField(max_length=100)
-    frieght_weight = models.CharField(max_length=20)
-    frieght_quantity = models.CharField(max_length=20)
-    comments = models.TextField()
-    frieght_rate = models.IntegerField()
-    miles_travelled = models.IntegerField()
-    fsc_per_mile = models.FloatField()
-    fsc_percent = models.FloatField()
-    fsc_amount = models.IntegerField()
-    sub_total = models.IntegerField()
-    total = models.IntegerField()
+    consignee = models.CharField(max_length=200)
+    frieght_description = models.CharField(max_length=200)
+    frieght_weight = models.CharField(max_length=200, null=True, blank=True)
+    frieght_quantity = models.CharField(max_length=200, null=True, blank=True)
+    comments = models.TextField(null=True, blank=True)
+    frieght_rate = models.FloatField(null=True, blank=True)
+    miles_travelled = models.FloatField(null=True, blank=True)
+    fsc_per_mile = models.FloatField(null=True, blank=True)
+    fsc_percent = models.FloatField(null=True, blank=True)
+    fsc_amount = models.FloatField(null=True, blank=True)
+    sub_total = models.FloatField(null=True, blank=True)
+    total = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.invoice_number

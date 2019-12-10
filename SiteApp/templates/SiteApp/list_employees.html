@@ -35,10 +35,11 @@
         <td><span>{{employee.department}}</span></td>
         <td><span>{{employee.designation}}</span></td>
         <td>
-          <span><a href="#" class="btn btn-success">Edit</a></span>
+          <a href="{% url 'edit_employee' id=employee.employee_id%}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
+        
         </td>
         <td>
-          <span><a href="#" class="btn btn-danger">Delete</a></span>
+          <a href="{% url 'delete_employee' id=employee.employee_id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
         </td>
       </tr>
       {% endfor %}

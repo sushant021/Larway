@@ -61,20 +61,26 @@
               >
             </li>
             <li class="nav-item backend-menu-item">
-              <a class="nav-link text-white" href="{% url 'list_customers' %}"
-                >Customers</a
+              <a class="nav-link text-white" href="{% url 'list_schedules' %}"
+                >Surcharge Schedules</a
               >
             </li>
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'list_invoices' %}"
                 >Invoices</a
               >
+            </li> 
+            <li class="nav-item backend-menu-item">
+              <a class="nav-link text-white" href="{% url 'list_customers' %}"
+                >Customers</a
+              >
             </li>
+            
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'list_departments' %}"
                 >Departments</a
               >
-            </li>
+            </li> 
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'list_employees' %}"
                 >Employees</a
@@ -94,11 +100,7 @@
                 >View Resumes</a
               >
             </li>
-            <li class="nav-item backend-menu-item">
-              <a class="nav-link text-white" href="{% url 'list_schedules' %}"
-                >Surcharge Schedules</a
-              >
-            </li>
+            
             <li class="nav-item backend-menu-item">
               <a class="nav-link text-white" href="{% url 'logout' %}"
                 >Log Out</a
@@ -146,9 +148,30 @@
               </li>
               <li class="mobile-menu-item">
                 <a
+                  href="{% url 'list_schedules' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Surcharge Schedules</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'list_invoices' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Invoices</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
                   href="{% url 'list_customers' %}"
                   class="mobile-menu-link text-uppercase"
                   >Customers</a
+                >
+              </li>
+              <li class="mobile-menu-item">
+                <a
+                  href="{% url 'list_departments' %}"
+                  class="mobile-menu-link text-uppercase"
+                  >Departments</a
                 >
               </li>
               <li class="mobile-menu-item">
