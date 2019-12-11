@@ -127,6 +127,9 @@ class ScheduleData(models.Model):
     tl_surcharge_percent = models.FloatField()
     ltl_surcharge_percent = models.FloatField()
 
+    def __str__(self):
+        return '%f: %f  %f' % (self.fuel_price, self.tl_surcharge_percent, self.ltl_surcharge_percent)
+
 
 class FuelSurcharge(models.Model):
     input_diesel_price = models.FloatField()

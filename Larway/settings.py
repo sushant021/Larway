@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['larway.herokuapp.com', 'localhost', ]
 INSTALLED_APPS = [
     'SiteApp',
     'crispy_forms',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
