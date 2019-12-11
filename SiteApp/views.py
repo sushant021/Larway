@@ -119,22 +119,32 @@ def FuelSurcharge(request):
 
     # get_surcharge_rates takes current fuel price and a column number(2 for TL and 3 for LTL) as parameters
     
-    tl_surcharge = get_surcharge_rate(us_price, 2)
-    ltl_surcharge = get_surcharge_rate(us_price, 3)
+    schedules = Schedule.objects.all()
+    schedule_dict = {}
+    for schedule in schedules:
+        tl_surcharge = get_surcharge_rate(schedule,us_price,2)
+        ltl_surcharge = get_surcharge_rate(schedule,us_price, 3)
+        schedule_dict[schedule] = [tl_surcharge,ltl_surcharge]
+    
+
+    # tl_surcharge = get_surcharge_rate(us_price, 2)
+    # ltl_surcharge = get_surcharge_rate(us_price, 3)
 
     # output surcharge rates for the form
-    form_tl_surcharge = 0
-    form_ltl_surcharge = 0
+    form_result_dict = {}
 
     # handling the user input form
     if request.method == "POST":
         form = FuelSurchargeForm(request.POST)
         if form.is_valid():
             input_price = form.cleaned_data['input_diesel_price']
-            schedule = form.cleaned_data['schedule']
-            form_tl_surcharge = get_surcharge_rate(input_price, 2)
-            # return HttpResponse(form_tl_surcharge)
-            form_ltl_surcharge = get_surcharge_rate(input_price, 3)
+            # schedule = form.cleaned_data['schedule']
+            form_result_dict = {}
+            for schedule in schedules:
+                 form_tl_surcharge = get_surcharge_rate(schedule, input_price, 2)
+                 form_ltl_surcharge = get_surcharge_rate(schedule, input_price, 3)
+                 form_result_dict[schedule] = [form_tl_surcharge, form_ltl_surcharge]
+           
         else:
             return HttpResponse("Invalid Form Request.")
 
@@ -144,10 +154,11 @@ def FuelSurcharge(request):
     context_dictionary = {'price_dict': price_dict,
                           'last_date': last_date,
                           'us_price': us_price,
-                          'tl_surcharge': tl_surcharge,
-                          'ltl_surcharge': ltl_surcharge,
-                          'form_tl_surcharge': form_tl_surcharge,
-                          'form_ltl_surcharge': form_ltl_surcharge,
+                        #   'tl_surcharge': tl_surcharge,
+                        #   'ltl_surcharge': ltl_surcharge,
+                            'schedule_dict':schedule_dict,
+                          'form_result_dict':form_result_dict,
+                          'form_result_dict_len':len(form_result_dict),
                           'form': form}
 
     return render(request, 'SiteApp/fuel_surcharge.html', context_dictionary)
@@ -421,51 +432,54 @@ def AddSchedule(request):
 # column number is either 2 or 3 , 2 is for TL and 3 is for LTL
 
 
-def get_surcharge_rate(fuel_price, col_num):
+def get_surcharge_rate(schedule, fuel_price, col_num):
     try:
-    # schedule_data = ScheduleData.objects.filter(schedule=schedule)
-    # my_list = []
-    # for data in schedule_data:
-    #     fuel_price = data.fuel_price
-    #     tl_surcharge = data.tl_surcharge_percent
-    #     ltl_surcharge = data.ltl_surcharge_percent
-    #     my_list.append([fuel_price,tl_surcharge,ltl_surcharge])
+        schedule_data = ScheduleData.objects.filter(schedule=schedule).get(fuel_price = round(fuel_price,2))
+        
+        tl_surcharge = schedule_data.tl_surcharge_percent
+        ltl_surcharge = schedule_data.ltl_surcharge_percent
+        if col_num == 2:
+            return round(tl_surcharge*100, 3)
+        elif col_num == 3:
+            return round(ltl_surcharge*100,3)
+        else:
+            return "Wrong column number"
 
     #create a data frame from the list 
     # df = pd.DataFrame(my_list, columns=['Fuel Price', 'TL Surcharge','LTL Surcharge'])
-        p = staticfiles_storage.path('data/surcharge_table.csv')
-        df = pd.read_csv(p)
+        # p = staticfiles_storage.path('data/surcharge_table.csv')
+        # df = pd.read_csv(p)
     except:
-          return False
+          return "No Data."
 
     # get the data
-    if col_num == 2:
-        x = df.iloc[80:, 1].values
-        y = df.iloc[80:, col_num].values
-    elif col_num == 3:
-        x = df.iloc[85:, 1].values
-        y = df.iloc[85:, col_num].values
-    else:
-        return False
+    # if col_num == 2:
+    #     x = df.iloc[80:, 1].values
+    #     y = df.iloc[80:, col_num].values
+    # elif col_num == 3:
+    #     x = df.iloc[85:, 1].values
+    #     y = df.iloc[85:, col_num].values
+    # else:
+    #     return False
 
-    # reshape the data
-    x = np.array(x).reshape(-1, 1)
-    y = np.array(y).reshape(-1, 1)
+    # # reshape the data
+    # x = np.array(x).reshape(-1, 1)
+    # y = np.array(y).reshape(-1, 1)
 
-    # split training data and test data
-    x_train, x_test, y_train, y_test = train_test_split(
-        x, y, test_size=0.2, random_state=4)
+    # # split training data and test data
+    # x_train, x_test, y_train, y_test = train_test_split(
+    #     x, y, test_size=0.2, random_state=4)
 
-    # train the model
-    model_tl = LinearRegression().fit(x_train, y_train)
-    y_pred = model_tl.predict(np.array(fuel_price).reshape(1, -1))
+    # # train the model
+    # model_tl = LinearRegression().fit(x_train, y_train)
+    # y_pred = model_tl.predict(np.array(fuel_price).reshape(1, -1))
 
-    # multiply by 100 and limit floating points to 3 decimal places
-    result = y_pred[0][0] * 100
-    result = round(result, 3)
+    # # multiply by 100 and limit floating points to 3 decimal places
+    # result = y_pred[0][0] * 100
+    # result = round(result, 3)
 
-    # return the result
-    return result
+    # # return the result
+    # return result
 
 
 def scrape_data():

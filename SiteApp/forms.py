@@ -41,7 +41,7 @@ class InvoiceForm(ModelForm):
 class FuelSurchargeForm(ModelForm):
     class Meta:
         model = FuelSurcharge
-        fields = '__all__'
+        fields = ('input_diesel_price', )
 
 
 class FuelDataForm(ModelForm):

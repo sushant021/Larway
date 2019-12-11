@@ -17,15 +17,20 @@
       <table class="table">
         <thead>
           <tr class="bg-light">
+            <th scope="col">Schedule</th>
             <th scope="col">Truckload (TL)</th>
             <th scope="col">Less Than Truckload (LTL)</th>
           </tr>
         </thead>
         <tbody>
+          {% for key,value in schedule_dict.items %}
           <tr class="bg-light">
-            <td>{{tl_surcharge}} %</td>
-            <td>{{ltl_surcharge}} %</td>
+            <td>{{key}}</td>
+            <td>{{value.0}} %</td>
+            <td>{{value.1}} %</td>
+
           </tr>
+          {% endfor %}
         </tbody>
       </table>
       <div class="gap-4"></div>
@@ -69,9 +74,26 @@
       <div class="gap-2"></div>
 
       
-      {% if form_tl_surcharge != 0 %}
-      <p>Truckload Surcharge Rate: {{form_tl_surcharge}} %</p>
-      <p>Less Than Truckload Surcharge Rate: {{form_ltl_surcharge}} %</p>
+      {% if form_result_dict_len != 0 %}
+        <table class="table">
+        <thead>
+          <tr class="bg-light">
+            <th scope="col">Schedule</th>
+            <th scope="col">Truckload (TL)</th>
+            <th scope="col">Less Than Truckload (LTL)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for key,value in form_result_dict.items %}
+          <tr class="bg-light">
+            <td>{{key}}</td>
+            <td>{{value.0}} %</td>
+            <td>{{value.1}} %</td>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
       {% endif %}
     </div>
   </div>
