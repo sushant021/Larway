@@ -89,14 +89,21 @@
           <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
             <p class="footer-heading">Useful Links</p>
             <ul class="footer-list px-0 pt-4">
-              <li class="text-white footer-list-item">About</li>
-              <li class="text-white footer-list-item">Services</li>
-              <li class="text-white footer-list-item">Contact Us</li>
-              <li class="text-white footer-list-item">Quote Request</li>
-              <li class="text-white footer-list-item">Drive With Us</li>
-              {% comment %}
-              <li class="text-white footer-list-item">Fuel Surcharge</li>
-              {% endcomment %}
+              <li class="text-white footer-list-item text-white">
+                <a href="{% url 'view_about' %}" class="text-white">About</a>
+              </li>
+              <li class="text-white footer-list-item text-white">
+                <a href="{% url 'view_services' %}" class="text-white">Services</a>
+              </li>
+              <li class="text-white footer-list-item text-white">
+                <a href="{% url 'view_contact' %}" class="text-white">Contact Us</a>
+              </li>
+              <li class="text-white footer-list-item text-white">
+                <a href="{% url 'request_quote' %}" class="text-white">Get A Quote</a>
+              </li>
+              <li class="text-white footer-list-item text-white">
+                <a href="{% url 'drive_with_us' %}" class="text-white">Drive With Us</a>
+              </li>
             </ul>
           </div>
           <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">

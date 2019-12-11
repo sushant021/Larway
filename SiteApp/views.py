@@ -499,7 +499,7 @@ def scrape_data():
         price_dict[region] = floats[i]
 
     date_result = content.find('Data For')
-    last_date = content[date_result+9:date_result+16]
+    last_date = content[date_result+9:date_result+17]
 
     # floats[0] is the average U.S. price, last_date is the last update date.
     return [price_dict, float(floats[0]), last_date]

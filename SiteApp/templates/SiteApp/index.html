@@ -3,7 +3,7 @@
   <div class="layer" style="border-radius: 0!important;">
     {% include 'SiteApp/nav.html' %}
     <div class="text-center">
-      <div class="caption">
+      <div class="caption animation animation-slideup">
         <div>
           <img
             src="{% static 'SiteApp/img/us_flag.jpg' %}"
@@ -130,7 +130,11 @@
           continues to be their word – and that will never change.
         </p>
         <p class="mt-4 ">
-          <a href="#" class="larway-btn" style="display:inline-block;">
+          <a
+            href="{% url 'view_contact' %}"
+            class="larway-btn"
+            style="display:inline-block;"
+          >
             Contact Us</a
           >
         </p>

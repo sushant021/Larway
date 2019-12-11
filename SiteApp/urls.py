@@ -12,7 +12,7 @@ urlpatterns = [
     path('contact-us/', views.viewContact, name='view_contact'),
     path('drive-with-us/', views.DriveWithUs, name='drive_with_us'),
     path('request-quote/', views.RequestQuote, name='request_quote'),
-    path('fuel-surcharge/', views.FuelSurcharge, name="fuel_surcharge"),
+
 
     # backend urls
     path('dashboard/', views.UserDashBoard, name='dashboard'),
@@ -21,6 +21,7 @@ urlpatterns = [
     path('quotes/<int:id>/', views.ViewQuote, name='view_quote'),
     path('resumes/<int:id>/', views.ViewResume, name='view_resume'),
     path('calculator/', views.FuelData, name='fuel_data'),
+    path('fuel-surcharge/', views.FuelSurcharge, name="fuel_surcharge"),
 
 
     # authentication

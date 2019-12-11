@@ -469,6 +469,23 @@ nav a:hover {
   width: 350px !important;
   height: 350px !important;
 }
+
+/* animations */
+.animation {
+  animation-duration: 1.5s;
+}
+.animation-slideup {
+  animation-name: slideUp;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(1000px);
+  }
+  to {
+    transform: translatex(0px);
+  }
+}
+
 /* media screens for responsiveness */
 @media only screen and (max-width: 1100px) {
   #servicesBackground {
